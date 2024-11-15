@@ -4,18 +4,41 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import '../css/CalendarContainer.css';
+import {getTodosForUser} from "../services/TodoListService";
 
 const CalendarContainer = () => {
-    const [events, setEvents] = useState([
-        { title: 'Todo 1', date: '2024-12-01' },
-        { title: 'Todo 2', date: '2024-12-02' },
-        { title: 'Todo 3', date: '2024-12-03' }
-    ]);
+    const [events, setEvents] = useState([]);
+
+    useEffect(() => {
+        const fetchTodos = async () => {
+            try {
+                // Hämta todos från API
+                const todoLists = await getTodosForUser();
+
+                // Mappar todo-data till FullCalendar-event-format
+                const mappedEvents = todoLists.flatMap(todoList =>
+                    todoList.todos.map(todo => ({
+                        title: todo,
+                        start: todoList.date, // Datumet för todo-listan
+                        allDay: true
+                    }))
+                );
+
+                setEvents(mappedEvents); // Uppdatera events
+            } catch (error) {
+                console.error('Error fetching todos for calendar:', error);
+            }
+        };
+
+        fetchTodos().then(r => console.log('Todos fetched'));
+    }, []);
 
     const handleDateClick = (info) => {
         const newTodo = prompt('Ny todo');
-        if (newTodo) {
+        if (newTodo && newTodo.trim() !== '') {
             setEvents([...events, { title: newTodo, date: info.dateStr }]);
+        } else {
+            alert('Du måste skriva något i fältet');
         }
     };
 

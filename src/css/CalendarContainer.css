@@ -47,6 +47,18 @@
     font-size: 1.5rem;
     color: #426e5f;
 }
+/* Ändra färg på alla kalenderhändelser */
+.fc-event {
+    background-color: #426e5f; /* Grön bakgrundsfärg */
+    color: white; /* Vit textfärg */
+    border-color: #375349; /* Mörkare grön kant */
+}
+
+/* Ändra färg när muspekaren är över en händelse */
+.fc-event:hover {
+    background-color: #375349; /* Mörkare grön när man hovrar */
+    border-color: #2c3e50; /* Ännu mörkare grön kant */
+}
 
 
 /* Responsivitet för surfplattor och mindre skärmar */
