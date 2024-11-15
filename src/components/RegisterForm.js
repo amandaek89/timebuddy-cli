@@ -19,7 +19,6 @@ const RegisterForm = () => {
 
     return (
         <div className="container">
-            <h2>Register</h2>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label form="username">Username</label>

@@ -1,41 +1,92 @@
 import React from 'react';
 import HeaderAuthenticated from '../components/HeaderAuthenticated';
 
-
 const StartPage = () => {
     return (
-    <div style={styles.container}>
-        <div style={styles.headerWrapper}>
-            <HeaderAuthenticated />
+        <div style={styles.container}>
+            <div style={styles.headerWrapper}>
+                <HeaderAuthenticated />
+            </div>
+            {/* Eventuella andra komponenter som listas här */}
         </div>
-    </div>
     );
 };
 
+// Stilar för komponenten
 const styles = {
     container: {
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center',
-        width: '100%',
+        height: '100vh',
     },
-    headerWrapper: {
-        width: '100%',
-    },
-    listContainer: {
+    navbar: {
+        backgroundColor: '#426e5f',
+        color: '#F5F5DC',
+        padding: '10px 20px',
         display: 'flex',
-        alignItems: 'left', // Vänsterjustera listContainer
-        justifyContent: 'center', // Centrera listContainer
-        margin: '20px',
-        width: '80%',
-        maxWidth: '1200px',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
-    list: {
+    navButton: {
+        backgroundColor: 'transparent',
+        color: '#F5F5DC',
+        border: 'none',
+        fontSize: '18px',
+        fontWeight: 'bold',
+        cursor: 'pointer',
+        padding: '10px 20px',
+        margin: '0 10px',
+        textDecoration: 'none',
+        transition: 'color 0.3s',
+    },
+    navButtonHover: {
+        color: '#ffffff',
+    },
+    mainContent: {
         flex: 1,
-        margin: '0 40px', // Minska avståndet mellan listorna till 20px
-        minWidth: '300px',
-        textAlign: 'center', // Centrera innehållet inom varje lista
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        textAlign: 'center',
+        color: '#426e5f',
     },
-};
+    card: {
+        backgroundColor: '#ffffff',
+        boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
+        borderRadius: '10px',
+        padding: '30px',
+        maxWidth: '400px',
+        width: '100%',
+        textAlign: 'center',
+        marginTop: '20px',
+    },
+    title: {
+        marginBottom: '20px',
+        fontSize: '32px',
+        fontWeight: 'bold',
+    },
+    subtitle: {
+        marginBottom: '40px',
+        fontSize: '20px',
+        fontWeight: 'normal',
+        color: '#6c757d',
+    },
+    toggleButton: {
+        backgroundColor: '#426e5f',
+        color: '#F5F5DC',
+        padding: '10px 20px',
+        border: 'none',
+        borderRadius: '5px',
+        fontSize: '16px',
+        cursor: 'pointer',
+        marginTop: '20px',
+        transition: 'background-color 0.3s',
+    },
+    toggleButtonHover: {
+        backgroundColor: '#375349',
+    },
+}
 
 export default StartPage;
+
