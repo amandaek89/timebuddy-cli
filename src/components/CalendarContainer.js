@@ -1,26 +1,29 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import '../css/CalendarContainer.css';
-import {getTodosForUser} from "../services/TodoListService";
+import { getTodosForUser } from "../services/TodoListService";
 
 const CalendarContainer = () => {
     const [events, setEvents] = useState([]);
+    const [calendarHeight, setCalendarHeight] = useState('80vh');
+    const [currentDate, setCurrentDate] = useState(null);
 
+    // Hämta todos från API och mappa om till rätt format för FullCalendar
     useEffect(() => {
         const fetchTodos = async () => {
             try {
-                // Hämta todos från API
                 const todoLists = await getTodosForUser();
+                console.log("Fetched todoLists:", todoLists);
 
-                // Mappar todo-data till FullCalendar-event-format
                 const mappedEvents = todoLists.flatMap(todoList =>
                     todoList.todos.map(todo => ({
-                        title: todo,
-                        start: todoList.date, // Datumet för todo-listan
-                        allDay: true
+                        id: `${todoList.date}-${todo}`, // Använd datum och titel som unik ID
+                        title: todo || "Okänd Todo", // Titel på todo
+                        start: todoList.date,
+                        allDay: true,
                     }))
                 );
 
@@ -30,45 +33,31 @@ const CalendarContainer = () => {
             }
         };
 
-        fetchTodos().then(r => console.log('Todos fetched'));
+        fetchTodos();
     }, []);
 
+    // Hantera klick på datum
     const handleDateClick = (info) => {
-        const newTodo = prompt('Ny todo');
-        if (newTodo && newTodo.trim() !== '') {
-            setEvents([...events, { title: newTodo, date: info.dateStr }]);
-        } else {
-            alert('Du måste skriva något i fältet');
-        }
+        const calendarApi = info.view.calendar;
+        setCurrentDate(info.dateStr); // Sätt det valda datumet
+        calendarApi.changeView('timeGridDay', info.dateStr); // Byt till dagsvy
     };
 
-    const [calendarHeight, setCalendarHeight] = useState('80vh');
-
-    useEffect(() => {
-        const handleResize = () => {
-            if (window.innerWidth < 768) {
-                setCalendarHeight('70vh');
-            } else {
-                setCalendarHeight('82vh');
-            }
-        };
-
-        handleResize();
-        window.addEventListener('resize', handleResize);
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
+    // Använd windowResize från FullCalendar
+    const handleWindowResize = (arg) => {
+        // Här kan du logga eller hantera ändringar i kalenderns vy
+        console.log('Calendar resized, current view:', arg.view.type);
+    };
 
     return (
         <div className={"calendar-container"}>
-            <div className="fullcalendar-wrapper">
+            <div className="calendar">
                 <FullCalendar
                     plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
                     initialView="dayGridMonth"
-                    events={events}
-                    dateClick={handleDateClick}
+                    aspectRatio={2}
+                    events={events} // Hämta events för alla vyer
+                    dateClick={handleDateClick} // Hantera klick på datum
                     headerToolbar={{
                         left: 'prev,next today',
                         center: 'title',
@@ -84,11 +73,11 @@ const CalendarContainer = () => {
                     slotMinTime="08:00:00"
                     slotMaxTime="17:00:00"
                     height={calendarHeight}
+                    windowResize={handleWindowResize} // Lägg till windowResize-händelsen här
                 />
             </div>
         </div>
     );
 };
-
 
 export default CalendarContainer;

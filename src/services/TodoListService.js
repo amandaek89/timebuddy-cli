@@ -17,4 +17,4 @@ export const getTodosForUser = async () => {
         console.error('Failed to get todos', error);
         return [];
     }
-}
+};

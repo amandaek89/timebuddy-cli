@@ -1,90 +1,32 @@
 /* Kalenderns container */
 .calendar-container {
     display: flex;
-    justify-content: center; /* Centrera horisontellt */
-    align-items: center; /* Centrera vertikalt */
+    justify-content: center;
+    align-items: center;
     background-color: #426e5f;
-    width: auto;
-    height: auto;
-    padding: 10px;
-    box-sizing: border-box;
-    flex-wrap: wrap; /* Tillåt innehåll att brytas på mindre skärmar */
-    border-radius: 8px;
-}
-
-/* Kalenderns wrapper */
-.fullcalendar-wrapper {
-    width: auto; /* Bredden bestäms av innehållet */
-    height: auto; /* Höjden bestäms av innehållet */
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #ffffff;
     padding: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+/* Själva kalendern */
+.calendar {
+    width: 100%; /* Fullbredd */
+    aspect-ratio: 16 / 8; /* Gör den liggande rektangulär */
+    background-color: white; /* Kalenderns bakgrund */
+    border-radius: 5px; /* Lätt avrundning */
+    padding: 10px; /* Padding inuti kalendern */
+    display: flex; /* För eventuell justering av innehåll */
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Lätt skugga */
+}
+.fc {
+    width: 100%;
+    max-width: 100%;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.fc-header-toolbar {
-    display: flex;
-    justify-content: space-between; /* Sprid header-elementen */
-    padding: 10px;
-    background-color: #f5f5f5;
-    border-bottom: 1px solid #ccc;
-}
-
-.fc-button {
-    background-color: #426e5f; /* Ändra bakgrundsfärg på knappar */
-    color: #807373;
-    border: none;
-    border-radius: 5px;
-    padding: 5px 10px;
-}
-
-.fc-button:hover {
-    background-color: #375349; /* Hover-effekt */
-}
-
-.fc-toolbar-title {
-    font-size: 1.5rem;
-    color: #426e5f;
-}
-/* Ändra färg på alla kalenderhändelser */
-.fc-event {
-    background-color: #426e5f; /* Grön bakgrundsfärg */
-    color: white; /* Vit textfärg */
-    border-color: #375349; /* Mörkare grön kant */
-}
-
-/* Ändra färg när muspekaren är över en händelse */
-.fc-event:hover {
-    background-color: #375349; /* Mörkare grön när man hovrar */
-    border-color: #2c3e50; /* Ännu mörkare grön kant */
-}
-
-
-/* Responsivitet för surfplattor och mindre skärmar */
-@media (max-width: 1024px) {
-    .fullcalendar-wrapper {
-        width: 100%;
-        padding: 15px;
-    }
-}
-
-@media (max-width: 768px) {
-    .calendar-container {
-        flex-direction: column; /* Vertikal layout för små skärmar */
-        height: auto;
-    }
-
-    .fullcalendar-wrapper {
-        width: 100%; /* Ta hela bredden på små skärmar */
-        padding: 10px; /* Minska padding */
-    }
-}
-
-@media (max-width: 480px) {
-    .fullcalendar-wrapper {
-        padding: 5px; /* Minska padding ytterligare för mobil */
-        font-size: 0.9rem; /* Minska textstorlek för mobil */
-    }
-
-}
