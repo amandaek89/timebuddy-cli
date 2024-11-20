@@ -1,13 +1,12 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
 /* För ProfilePage-komponenten */
 .profile-page {
     display: flex;
     flex-direction: column;
-    height: 100vh;
-}
-
-/* Gör Navbar till fullbredd */
-.profile-page .navbar {
-    width: 100%; /* Täcker hela sidans bredd */
+    height: 100%;
 }
 
 /* För innehållet på sidan */

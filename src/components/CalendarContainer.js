@@ -55,6 +55,7 @@ const CalendarContainer = () => {
                 <FullCalendar
                     plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
                     initialView="dayGridMonth"
+                    firstDay={1}
                     aspectRatio={2}
                     events={events} // Hämta events för alla vyer
                     dateClick={handleDateClick} // Hantera klick på datum

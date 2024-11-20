@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import HeaderAuthenticated from '../components/HeaderAuthenticated';
 import {isAuthenticated} from "../services/AuthenticationService";
 import {Navigate} from "react-router-dom";
+import '../css/Media-queries.css';
 
 
 const StartPage = () => {
@@ -25,7 +26,9 @@ const StartPage = () => {
 
             {/* Profilinnehåll */}
             <div className={"main-content"}>
-                <h2 className="start-title">Välkommen till startsidan</h2>
+                <div className="start-page-content">
+                    <h1>Välkommen till startsidan</h1>
+                </div>
             </div>
         </div>
     );

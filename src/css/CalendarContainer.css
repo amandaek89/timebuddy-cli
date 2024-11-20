@@ -12,7 +12,8 @@
 }
 /* Själva kalendern */
 .calendar {
-    width: 100%; /* Fullbredd */
+    width: 100%;
+    margin: 0 auto;
     aspect-ratio: 16 / 8; /* Gör den liggande rektangulär */
     background-color: white; /* Kalenderns bakgrund */
     border-radius: 5px; /* Lätt avrundning */
@@ -30,3 +31,28 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+/* Media Query för skärmar med maxbredd 768px (t.ex. surfplattor) */
+@media (max-width: 768px) {
+    .calendar-container {
+        max-height: 70vh;  /* Justera kalenderns maxhöjd */
+    }
+
+    .calendar {
+        width: 100%;  /* Håll kalendern fullbredd */
+        aspect-ratio: 16 / 9;
+        padding: 10px;
+    }
+}
+
+/* Media Query för skärmar med maxbredd 480px (t.ex. mobiltelefoner) */
+@media (max-width: 480px) {
+    .calendar-container {
+        max-height: 60vh;  /* Justera kalenderns maxhöjd ytterligare */
+    }
+
+    .calendar {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        padding: 8px;
+    }
+}

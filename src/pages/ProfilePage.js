@@ -4,7 +4,7 @@ import HeaderAuthenticated from "../components/HeaderAuthenticated";
 import { Navigate } from "react-router-dom";
 import { isAuthenticated } from "../services/AuthenticationService";
 import '../css/ProfilePage.css';
-
+import '../css/Media-queries.css';
 const ProfilePage = () => {
     const isAuth = isAuthenticated();  // Kontrollera autentisering
 
