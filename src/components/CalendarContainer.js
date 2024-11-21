@@ -5,82 +5,55 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import '../css/CalendarContainer.css';
 import '../css/Media-queries.css';
-import { getAllTodos } from "../services/TodoService";
+import { useTodos } from '../context/TodosContext'; // Importera contexten
 import AddTodoModal from "./AddTodoModal";
 
 const CalendarContainer = () => {
-    const [events, setEvents] = useState([]);
+    const { todos, addNewTodo, TodoStatus } = useTodos(); // Hämta todos från contexten
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedDate, setSelectedDate] = useState(null);
 
-    // Hämta todos från API och mappa om till rätt format för FullCalendar
+    // Mappa todos till events-formatet för FullCalendar
     useEffect(() => {
-        const fetchTodos = async () => {
-            try {
-                const todoLists = await getAllTodos();
-                console.log("Fetched todoLists:", todoLists);
+        const mappedEvents = todos.map(todo => {
+            const startDate = todo.time ? `${todo.date}T${todo.time}` : todo.date;
+            return {
+                title: todo.title,
+                start: startDate,
+                description: todo.description,
+                allDay: todo.allDay,
+                done: todo.done,
+                id: todo.id
+            };
+        });
 
-                const mappedEvents = todoLists.map(todo => {
-                    // Kombinera datum och tid till ISO-format för start
-                    const startDate = todo.time ? `${todo.date}T${todo.time}` : todo.date;
+    }, [todos]); // Uppdatera när todos ändras
 
-                    return {
-                        title: todo.title,
-                        start: startDate, // Starttid (kombinerad från date + time)
-                        description: todo.description, // Beskrivning (för detaljer)
-                        allDay: todo.allDay, // Om det är en heldag
-                        done: todo.done // Om det är klart
-                    };
-                });
+    // Hantera klick på datum
+    const handleDateClick = (info) => {
+        setSelectedDate(info.dateStr);
+        setIsModalOpen(true);
+    };
 
-                setEvents(mappedEvents); // Uppdatera events
-            } catch (error) {
-                console.error('Error fetching todos for calendar:', error);
-            }
-        };
+    // Hantera klick på event
+    const handleEventClick = (info) => {
+        const id = info.event.id;
+        const currentStatus = info.event.extendedProps.done;
+        TodoStatus(id, !currentStatus);  // Växla statusen mellan klar/inte klar
+    };
 
-        fetchTodos().then(r => console.log("Fetched todos for calendar"));
-    }, []);
+    // Lägg till en ny todo
+    const handleTodoAdded = (newTodo) => {
+        addNewTodo(selectedDate, newTodo);  // Lägg till todo genom contexten
+    };
 
-    // Anpassa eventinnehåll baserat på aktuell vy
     const renderEventContent = (eventInfo) => {
-        const { title } = eventInfo.event;
-        const viewType = eventInfo.view.type; // Aktuell vy (t.ex., 'dayGridMonth', 'timeGridWeek')
-
-        if (viewType === 'dayGridMonth') {
-            // Visa endast titel i månadsvisningen
-            return <div>{title}</div>;
-        }
-
-        // Visa både tid och titel i andra vyer
+        const {title} = eventInfo.event;
         return (
             <div>
                 <div>{title}</div>
             </div>
         );
-    };
-    // Hantera klick på datum
-    const handleDateClick = (info) => {
-        console.log("Selected Date:", info.dateStr); // Kontrollera om datumet är korrekt
-        setSelectedDate(info.dateStr);
-        setIsModalOpen(true);
-    };
-
-
-    const handleTodoAdded = (newTodo) => {
-        setEvents((prevEvents) => [...prevEvents, {
-            title: newTodo.title,
-            start: newTodo.time ? `${newTodo.date}T${newTodo.time}` : newTodo.date,
-            description: newTodo.description,
-            allDay: newTodo.allDay,
-            done: newTodo.done
-        }]);
-    };
-
-    // Hantera klick på event
-    const handleEventClick = (info) => {
-        console.log('Event clicked:', info.event);
-        alert(`Event: ${info.event.title}\nBeskrivning: ${info.event.extendedProps.description}`);
     };
 
     return (
@@ -91,23 +64,29 @@ const CalendarContainer = () => {
                     initialView="dayGridMonth"
                     firstDay={1}
                     aspectRatio={2}
-                    events={events} // Eventlista
+                    events={todos.map(todo => ({
+                        title: todo.title,
+                        start: `${todo.date}T${todo.time}`,
+                        description: todo.description,
+                        done: todo.done,
+                        id: todo.id
+                    }))} // Använd todos från contexten
                     eventClick={handleEventClick}
-                    eventDisplay="block" // Visa endast titel i vyerna
-                    dateClick={handleDateClick} // Hantera klick på datum öppna modal för att lägga till händelse
-                    eventContent={renderEventContent} // Anpassa eventinnehåll
+                    eventDisplay="block"
+                    dateClick={handleDateClick}
+                    eventContent={renderEventContent}
                     headerToolbar={{
                         left: 'prev,next today',
                         center: 'title',
                         right: 'dayGridMonth,timeGridWeek,timeGridDay'
                     }}
-                    locale="sv" // Svensk lokal
-                    slotMinTime="08:00" // Tidigaste tid i dagsvy
-                    slotMaxTime="17:00" // Senaste tid i dagsvy
+                    locale="sv"
+                    slotMinTime="08:00"
+                    slotMaxTime="17:00"
                 />
                 {isModalOpen && (
                     <AddTodoModal
-                        selectedDate={selectedDate}  // Skickar selectedDate som en prop
+                        selectedDate={selectedDate}
                         onClose={() => setIsModalOpen(false)}
                         onTodoAdded={handleTodoAdded}
                     />
