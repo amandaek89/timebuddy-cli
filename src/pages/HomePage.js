@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import RegisterForm from '../components/RegisterForm';
 import LoginForm from '../components/LoginForm';
+import '../css/Media-queries.css';
 
 const HomePage = () => {
     const [isLogin, setIsLogin] = useState(true);
