@@ -1,0 +1,51 @@
+/* Grundläggande styling för startsidan */
+.start-page {
+    display: flex;
+    height: 100vh; /* Gör hela sidan till höjd 100% */
+    background-color: #f4f4f9;
+}
+
+/* Vänster panel */
+.left-panel {
+    width: 50%; /* Sätt bredden till 30% för vänster panel */
+    padding: 20px;
+    background-color: #426e5f;
+    color: #0a0a0a;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Klocka och vecka */
+.clock {
+    font-size: 2em;
+    margin-bottom: 20px;
+
+}
+
+.date-info {
+    font-size: 1.2em;
+}
+
+/* Höger panel */
+.right-panel {
+    width: 50%; /* Höger panel tar upp 70% av bredden */
+    padding: 20px;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* Responsiv design */
+@media (max-width: 768px) {
+    .homepage {
+        flex-direction: column;
+    }
+    .left-panel, .right-panel {
+        width: 100%; /* Ta upp 100% av bredden vid mindre skärmar */
+    }
+}

@@ -121,3 +121,18 @@ export const addTodo = async (date, todoRequest) => {
         throw error;
     }
 };
+
+export const getTodosForDate = async (date) => {
+    const token = getAuthToken();
+    try {
+        const response = await axios.get(`${API_BASE_URL}/date/${date}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+        return response.data;
+        } catch (error) {
+        console.error('Error fetching todos:', error);
+        throw error;
+    }
+};
