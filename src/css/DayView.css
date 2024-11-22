@@ -1,0 +1,103 @@
+.day-view {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+
+.time-grid {
+    display: flex;
+}
+
+.time-column {
+    width: 100px;
+    text-align: right;
+    padding-right: 10px;
+}
+
+.todo-column {
+    flex-grow: 1;
+    padding-left: 10px;
+}
+
+.time-slot {
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.todo-slot {
+    margin-bottom: 10px;
+}
+
+.todo-item {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 0;
+}
+
+.checkbox-label input {
+    margin-left: 10px;
+}
+
+.todo-item span {
+    flex-grow: 1;
+    cursor: pointer;
+}
+
+.add-todo-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #426e5f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.add-todo-button:hover {
+    background-color: #426e5f;
+}
+
+.todos-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.todos-table th,
+.todos-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.todos-table th {
+    background-color: #f4f4f4;
+}
+
+.all-day-row {
+    background-color: #f0f0f0;
+}
+
+.todo-item {
+    margin: 5px 0;
+}
+
+.checkbox-label {
+    margin-left: 10px;
+}
+
+.add-todo-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #426e5f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.add-todo-button:hover {
+    background-color: #426e5f;
+}
+
+

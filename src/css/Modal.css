@@ -1,0 +1,204 @@
+/* Modalens struktur och bakgrund */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 400px;
+    z-index: 1100;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+/* Formuläret */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px; /* Utrymme mellan rader */
+}
+
+/* Innehållsrader i formuläret */
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px; /* Utrymme mellan label och input */
+}
+
+/* Label */
+form label {
+    flex: 1; /* Label tar en proportionell del av raden */
+    font-size: 14px;
+    text-align: right; /* Högerjustera text för bättre inriktning */
+    margin-right: 8px;
+}
+
+/* Input */
+form input,
+form textarea {
+    flex: 2; /* Input tar två proportioner jämfört med label */
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Textarea specifikt */
+form textarea {
+    resize: vertical; /* Tillåter bara vertikal storleksändring */
+    min-height: 60px; /* Lägsta höjd för beskrivningsfält */
+}
+
+/* Knappar */
+.modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button:hover {
+    background-color: #f0f0f0;
+}
+
+/* Anpassningar för mindre skärmar */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 95%;
+        padding: 15px;
+    }
+
+    form label {
+        font-size: 12px;
+    }
+
+    button {
+        font-size: 12px;
+    }
+}
+/* Modalens struktur och bakgrund */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 400px;
+    z-index: 1100;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+/* Formuläret */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px; /* Utrymme mellan rader */
+}
+
+/* Innehållsrader i formuläret */
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px; /* Utrymme mellan label och input */
+}
+
+/* Label */
+form label {
+    flex: 1; /* Label tar en proportionell del av raden */
+    font-size: 14px;
+    text-align: right; /* Högerjustera text för bättre inriktning */
+    margin-right: 8px;
+}
+
+/* Input */
+form input,
+form textarea {
+    flex: 2; /* Input tar två proportioner jämfört med label */
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Textarea specifikt */
+form textarea {
+    resize: vertical; /* Tillåter bara vertikal storleksändring */
+    min-height: 60px; /* Lägsta höjd för beskrivningsfält */
+}
+
+/* Knappar */
+.modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button:hover {
+    background-color: #f0f0f0;
+}
+
+/* Anpassningar för mindre skärmar */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 95%;
+        padding: 15px;
+    }
+
+    form label {
+        font-size: 12px;
+    }
+
+    button {
+        font-size: 12px;
+    }
+}

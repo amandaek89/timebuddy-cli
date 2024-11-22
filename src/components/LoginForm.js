@@ -13,7 +13,7 @@ const LoginForm = () => {
         if (success) {
             // small delay to make sure token is saved
             setTimeout(() => {
-                navigate('/startPage');
+                navigate('/startsida');
                 console.log('Signed in');
             }, 100);
         } else {
@@ -24,7 +24,6 @@ const LoginForm = () => {
     return (
 
         <div className="container">
-            <h2>Login</h2>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="username">Username</label>
@@ -34,7 +33,7 @@ const LoginForm = () => {
                         type="username"
                         className="form-control"
                         id="username"
-                        placeholder="username"
+                        placeholder="Enter username"
                         autoComplete={"username"}
                     />
                 </div>
@@ -46,7 +45,7 @@ const LoginForm = () => {
                         type="password"
                         className="form-control"
                         id="pwd"
-                        placeholder="password"
+                        placeholder="Enter password"
                         autoComplete={"current-password"}
                     />
                 </div>

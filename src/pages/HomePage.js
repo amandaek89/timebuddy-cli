@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import RegisterForm from '../components/RegisterForm';
 import LoginForm from '../components/LoginForm';
+import '../css/Media-queries.css';
 
 const HomePage = () => {
     const [isLogin, setIsLogin] = useState(true);
@@ -35,19 +36,19 @@ const HomePage = () => {
             {/* Main Content */}
             <main style={styles.mainContent}>
                 <h1 style={styles.title}>TimeBuddy</h1>
-                <h2 style={styles.subtitle}>For a structured life</h2>
+                <h2 style={styles.subtitle}>För ett strukturerat liv</h2>
 
                 {/* Form Card */}
                 {isVisible && (
                     <div style={styles.card}>
-                        <h3>{isLogin ? 'Sign In' : 'Register'}</h3>
+                        <h2>{isLogin ? 'Logga in' : 'Registrera'}</h2>
                         {isLogin ? <LoginForm /> : <RegisterForm />}
                         <button
                             style={styles.toggleButton}
                             onClick={() => setIsLogin(!isLogin)}>
                             {isLogin
-                                ? "Don't have an account? Register"
-                                : "Already have an account? Sign In"}
+                                ? "Har du inget konto? Registrera dig"
+                                : "Har du redan ett konto? Logga in"}
                         </button>
                     </div>
                 )}

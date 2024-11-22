@@ -1,0 +1,58 @@
+/* Kalenderns container */
+.calendar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #426e5f;
+    padding: 20px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+/* Själva kalendern */
+.calendar {
+    width: 100%;
+    margin: 0 auto;
+    aspect-ratio: 16 / 8; /* Gör den liggande rektangulär */
+    background-color: white; /* Kalenderns bakgrund */
+    border-radius: 5px; /* Lätt avrundning */
+    padding: 10px; /* Padding inuti kalendern */
+    display: flex; /* För eventuell justering av innehåll */
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Lätt skugga */
+}
+.fc {
+    width: 100%;
+    max-width: 100%;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Media Query för skärmar med maxbredd 768px (t.ex. surfplattor) */
+@media (max-width: 768px) {
+    .calendar-container {
+        max-height: 70vh;  /* Justera kalenderns maxhöjd */
+    }
+
+    .calendar {
+        width: 100%;  /* Håll kalendern fullbredd */
+        aspect-ratio: 16 / 9;
+        padding: 10px;
+    }
+}
+
+/* Media Query för skärmar med maxbredd 480px (t.ex. mobiltelefoner) */
+@media (max-width: 480px) {
+    .calendar-container {
+        max-height: 60vh;  /* Justera kalenderns maxhöjd ytterligare */
+    }
+
+    .calendar {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        padding: 8px;
+    }
+}

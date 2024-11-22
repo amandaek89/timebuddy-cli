@@ -1,0 +1,43 @@
+/* CSS för navbaren */
+.navbar {
+    background-color: #426e5f; /* Grön bakgrund */
+    padding: 10px 20px; /* Padding för att ge navbaren utrymme */
+}
+
+/* Container för navbarens innehåll */
+.navbar-container {
+    display: flex;
+    justify-content: space-between; /* Länkar till vänster, logout till höger */
+    align-items: center;
+    width: 100%;
+}
+
+/* Container för länkar */
+.nav-links {
+    display: flex;
+    justify-content: center; /* Centra länkarna horisontellt */
+    align-items: center;
+    gap: 20px; /* Mellanrum mellan länkar */
+}
+
+/* Stil för individuella länkar */
+.nav-link {
+    text-decoration: none; /* Ta bort understrykning */
+    color: #F5F5DC; /* Beige färg */
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    padding: 5px 10px;
+    transition: color 0.3s; /* Övergång vid hover */
+}
+
+.nav-link:hover {
+    color: #ffffff; /* Vit färg vid hover */
+}
+
+/* Container för logout-knappen */
+.logout-container {
+    display: flex;
+    justify-content: flex-end; /* Placera logout-knappen till höger */
+    align-items: center;
+}
