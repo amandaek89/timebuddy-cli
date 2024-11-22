@@ -11,11 +11,6 @@ import {
 // Skapa Contexten för Todos
 const TodosContext = createContext();
 
-// Custom Hook för att använda TodosContext
-export const useTodos = () => {
-    return useContext(TodosContext);
-};
-
 // TodosProvider-komponent som hanterar alla Todo-relaterade operationer
 export const TodosProvider = ({ children }) => {
     const [todos, setTodos] = useState([]);
@@ -31,7 +26,7 @@ export const TodosProvider = ({ children }) => {
             }
         };
 
-        fetchTodos();
+        fetchTodos().then(r => console.log('Todos fetched'));
     }, []);
 
     // Lägg till en ny todo
@@ -71,7 +66,9 @@ export const TodosProvider = ({ children }) => {
     // Uppdatera todo-status (Done/Not Done)
     const TodoStatus = async (id, isDone) => {
         try {
-            const updatedTodo = isDone ? await markTodoAsDone(id) : await markTodoAsNotDone(id);
+            const updatedTodo = isDone
+                ? await markTodoAsDone(id)
+                : await markTodoAsNotDone(id);
 
             setTodos((prevTodos) =>
                 prevTodos.map(todo =>
@@ -97,3 +94,5 @@ export const TodosProvider = ({ children }) => {
         </TodosContext.Provider>
     );
 };
+
+export const useTodos = () => useContext(TodosContext);
