@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../css/StartPage.css';
-import DayView from "../components/DayView"; // CSS-fil för styling
+import DayView from "../components/DayView"; // Importera DayView
+import HeaderAuthenticated from "../components/HeaderAuthenticated"; // Importera HeaderAuthenticated
 
 const StartPage = () => {
     const [currentTime, setCurrentTime] = useState(new Date()); // För att hålla koll på den aktuella tiden
@@ -39,23 +40,26 @@ const StartPage = () => {
 
     return (
         <div className="start-page">
-            <div className="left-panel">
-                <div className="clock">
-                    <h2>Klocka</h2>
-                    <p>{formattedTime}</p>
+            {/* Header */}
+            <HeaderAuthenticated /> {/* Lägg till headern överst */}
+
+            <div className="content">
+                <div className="left-panel">
+                    <div className="clock">
+                        <h2>Klocka</h2>
+                        <p>{formattedTime}</p>
+                    </div>
+                    <div className="date-info">
+                        <p>{formattedDate}</p>
+                        <p>Vecka: {weekNumber}</p>
+                    </div>
                 </div>
-                <div className="date-info">
-                    <p>{formattedDate}</p>
-                    <p>Vecka: {weekNumber}</p>
+                <div className="right-panel">
+                    <DayView selectedDate={selectedDate} /> {/* Skicka valfritt datum till DayView */}
                 </div>
-            </div>
-            <div className="right-panel">
-                <DayView selectedDate={selectedDate} /> {/* Skicka valfritt datum till DayView */}
             </div>
         </div>
     );
 };
 
 export default StartPage;
-
-

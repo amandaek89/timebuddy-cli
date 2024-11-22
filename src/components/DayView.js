@@ -44,14 +44,10 @@ const DayView = () => {
         }
     };
 
-    const handleAddTodo = async (newTodo) => {
-        try {
-            await addTodo(newTodo);
-            await fetchTodos();
-        } catch (error) {
-            console.error('Error adding new todo:', error);
-        }
+    const handleAddTodo = (newTodo) => {
+        setTodos((prevTodos) => [...prevTodos, newTodo]); // Lägg till nya todo i state
     };
+
 
     const getTodosForTime = (timeSlot) => {
         return todos.filter(todo => {

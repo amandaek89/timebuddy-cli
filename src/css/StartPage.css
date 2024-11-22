@@ -37,6 +37,21 @@
     flex-direction: column;
 }
 
+.start-page {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.content {
+    display: flex;
+    flex: 1;
+}
+
+.left-panel, .right-panel {
+    padding: 20px;
+}
+
 
 /* Responsiv design */
 @media (max-width: 768px) {

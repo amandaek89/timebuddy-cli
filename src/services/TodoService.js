@@ -110,8 +110,8 @@ export const addTodo = async (date, todoRequest) => {
     try {
         const response = await axios.post(`${API_BASE_URL}/add/${date}`, todoRequest, {
             headers: {
+                'Content-Type': 'application/json',
                 Authorization: `Bearer ${token}`,
-                'Content-Type': 'application/json'
             },
         });
 
