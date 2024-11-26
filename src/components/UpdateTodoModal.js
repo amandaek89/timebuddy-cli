@@ -1,35 +1,22 @@
 import React, { useState } from "react";
 import { FaTimes } from "react-icons/fa"; // Stängningsikon
-import {addTodo} from "../services/TodoService";
-import "../css/Modal.css";
+import "../css/UpdateTodoModal.css";
 
-const AddTodoModal = ({ selectedDate, onClose, onTodoAdded }) => {
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
-    const [time, setTime] = useState("");
+const UpdateTodoModal = ({ todo, onClose, onUpdate }) => {
+    const [title, setTitle] = useState(todo.title || "");
+    const [description, setDescription] = useState(todo.description || "");
+    const [time, setTime] = useState(todo.time || "");
     const [isSaving, setIsSaving] = useState(false);
 
-    const handleSubmit = async (e) => {
+    const handleSave = async (e) => {
         e.preventDefault();
-
-        if (!selectedDate) {
-            console.error("No date selected");
-            return;
-        }
-
-        const todoRequest = {
-            title,
-            description,
-            time: time || null,
-        };
-
         setIsSaving(true);
+        const updatedTodo = { ...todo, title, description, time };
+
         try {
-            const newTodo = await addTodo(selectedDate, todoRequest);
-            onTodoAdded(newTodo);
-            onClose();
+            await onUpdate(todo.id, updatedTodo);
         } catch (error) {
-            console.error("Error adding todo:", error);
+            console.error("Error updating todo:", error);
         } finally {
             setIsSaving(false);
         }
@@ -38,9 +25,9 @@ const AddTodoModal = ({ selectedDate, onClose, onTodoAdded }) => {
     return (
         <div className="modal-overlay">
             <div className="modal-content">
-                {/* Header */}
+                {/* Modal header */}
                 <div className="modal-header">
-                    <h2 className="modal-title">Lägg till ny händelse</h2>
+                    <h2 className="modal-title">Redigera Todo</h2>
                     <button
                         className="icon-button close-button"
                         onClick={onClose}
@@ -50,7 +37,7 @@ const AddTodoModal = ({ selectedDate, onClose, onTodoAdded }) => {
                     </button>
                 </div>
 
-                <form onSubmit={handleSubmit} className="modal-form">
+                <form onSubmit={handleSave} className="modal-form">
                     <label>
                         <span className="form-label">Titel</span>
                         <input
@@ -81,7 +68,7 @@ const AddTodoModal = ({ selectedDate, onClose, onTodoAdded }) => {
                             className="action-button save-button"
                             disabled={isSaving}
                         >
-                            {isSaving ? "Sparar..." : "Lägg till"}
+                            {isSaving ? "Sparar..." : "Spara"}
                         </button>
                         <button
                             type="button"
@@ -98,5 +85,4 @@ const AddTodoModal = ({ selectedDate, onClose, onTodoAdded }) => {
     );
 };
 
-export default AddTodoModal;
-
+export default UpdateTodoModal;
