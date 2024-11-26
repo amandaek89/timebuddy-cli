@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { getTodosForDate, markTodoAsDone, addTodo } from '../services/TodoService';
-import TodoDetailModal from './TodoDetailModal';
+import {deleteTodo, getTodosForDate, markTodoAsDone, updateTodo} from '../services/TodoService';
+import TodoModal from './TodoModal';
+import UpdateTodoModal from './UpdateTodoModal';
 import AddTodoModal from './AddTodoModal';
 import '../css/DayView.css';
 
@@ -9,11 +10,10 @@ const DayView = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [selectedTodo, setSelectedTodo] = useState(null);
     const [isAddTodoModalOpen, setIsAddTodoModalOpen] = useState(false);
+    const [todoToEdit, setTodoToEdit] = useState(null);
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-    const getTodayDate = () => {
-        const today = new Date();
-        return today.toISOString().split('T')[0];
-    };
+    const getTodayDate = () => new Date().toISOString().split('T')[0];
 
     const fetchTodos = useCallback(async () => {
         setIsLoading(true);
@@ -28,40 +28,80 @@ const DayView = () => {
     }, []);
 
     useEffect(() => {
-        fetchTodos().then(r => console.log("Fetched todos for calendar"));
+        fetchTodos().then(() => console.log("Fetched todos"));
     }, [fetchTodos]);
 
     const handleCheckboxChange = async (todoId, done) => {
         try {
             await markTodoAsDone(todoId);
             setTodos((prevTodos) =>
-                prevTodos.map((todo) =>
-                    todo.id === todoId ? { ...todo, done } : todo
-                )
+                prevTodos.map((todo) => (todo.id === todoId ? { ...todo, done } : todo))
             );
         } catch (error) {
             console.error('Error marking todo as done:', error);
         }
     };
 
+    const handleEditClick = (todo) => {
+        setSelectedTodo(null); // Stäng detaljmodal
+        setTodoToEdit(todo); // Öppna redigering för vald todo
+        setIsEditModalOpen(true); // Öppna redigeringsmodal
+    };
+
+    const handleUpdateTodo = async (id, updatedTodo) => {
+        try {
+            const updatedData = await updateTodo(id, updatedTodo);
+
+            // Direkt lokal uppdatering för snabb feedback
+            setTodos((prevTodos) =>
+                prevTodos.map((todo) =>
+                    todo.id === id ? { ...todo, ...updatedData } : todo
+                )
+            );
+
+            // Hämta nya todos från backend för att synkronisera
+            await fetchTodos();
+
+            // Stäng modal och rensa redigeringsstate
+            setIsEditModalOpen(false);
+            setTodoToEdit(null);
+
+            console.log("Todo updated successfully.");
+        } catch (error) {
+            console.error("Error updating todo:", error);
+        }
+    };
+
+    const handleDeleteTodo = async (id) => {
+        try {
+            await deleteTodo(id); // Anropa delete-funktion
+            setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id)); // Uppdatera state
+            console.log("Todo deleted successfully.");
+        } catch (error) {
+            console.error("Error deleting todo:", error);
+        }
+    };
+
+
     const handleAddTodo = (newTodo) => {
-        setTodos((prevTodos) => [...prevTodos, newTodo]); // Lägg till nya todo i state
+        setTodos((prevTodos) => [...prevTodos, newTodo]);
     };
 
-
-    const getTodosForTime = (timeSlot) => {
-        return todos.filter(todo => {
-            const todoTime = todo.time ? todo.time.split(":")[0] : null;
-            return todoTime && todoTime === timeSlot.split(":")[0];
+    const getTodosForTime = (timeSlot) =>
+        todos.filter((todo) => {
+            const todoTime = todo.time?.split(":")[0];
+            return todoTime === timeSlot.split(":")[0];
         });
-    };
 
-    const getAllDayTodos = () => todos.filter(todo => todo.allDay);
+    const getAllDayTodos = () => todos.filter((todo) => todo.allDay);
 
     return (
         <div className="day-view">
             <div className="header">
-                <button className="add-todo-button" onClick={() => setIsAddTodoModalOpen(true)}>
+                <button
+                    className="add-todo-button"
+                    onClick={() => setIsAddTodoModalOpen(true)}
+                >
                     Lägg till händelse
                 </button>
             </div>
@@ -80,11 +120,13 @@ const DayView = () => {
                     <tbody>
                     {Array.from({ length: 10 }, (_, index) => {
                         const timeSlot = `${8 + index}:00`;
+                        const todosForSlot = getTodosForTime(timeSlot);
+
                         return (
                             <tr key={timeSlot}>
                                 <td>{timeSlot}</td>
                                 <td>
-                                    {getTodosForTime(timeSlot).map(todo => (
+                                    {todosForSlot.map((todo) => (
                                         <div
                                             key={todo.id}
                                             className="todo-item"
@@ -95,7 +137,7 @@ const DayView = () => {
                                     ))}
                                 </td>
                                 <td>
-                                    {getTodosForTime(timeSlot).map(todo => (
+                                    {todosForSlot.map((todo) => (
                                         <label key={todo.id} className="checkbox-label">
                                             <input
                                                 type="checkbox"
@@ -110,11 +152,12 @@ const DayView = () => {
                             </tr>
                         );
                     })}
+
                     {getAllDayTodos().length > 0 && (
                         <tr>
                             <td colSpan="3" className="all-day-row">
                                 <h3>Övrigt</h3>
-                                {getAllDayTodos().map(todo => (
+                                {getAllDayTodos().map((todo) => (
                                     <div
                                         key={todo.id}
                                         className="todo-item"
@@ -140,9 +183,22 @@ const DayView = () => {
             )}
 
             {selectedTodo && (
-                <TodoDetailModal
+                <TodoModal
                     todo={selectedTodo}
                     onClose={() => setSelectedTodo(null)}
+                    onEdit={(todo) => {
+                        setTodoToEdit(todo);
+                        setIsEditModalOpen(true);
+                    }}
+                    onDelete={handleDeleteTodo} // Lägg till onDelete
+                />
+            )}
+
+            {isEditModalOpen && (
+                <UpdateTodoModal
+                    todo={todoToEdit}
+                    onClose={() => setIsEditModalOpen(false)}
+                    onUpdate={handleUpdateTodo}
                 />
             )}
 
@@ -158,3 +214,4 @@ const DayView = () => {
 };
 
 export default DayView;
+

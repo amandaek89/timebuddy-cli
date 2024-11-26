@@ -1,41 +1,47 @@
+/* Grundläggande layout */
 .day-view {
     display: flex;
     flex-direction: column;
-    margin: 20px;
+    margin: 5px; /* Minska marginalen för att utnyttja utrymmet bättre */
 }
 
 .time-grid {
     display: flex;
+    flex-direction: column;
 }
 
 .time-column {
-    width: 100px;
+    width: 80px; /* Minska bredden på tidskolumnen */
     text-align: right;
-    padding-right: 10px;
+    padding-right: 5px;
+    font-size: 12px; /* Minska fontstorlek */
 }
 
 .todo-column {
     flex-grow: 1;
-    padding-left: 10px;
+    padding-left: 5px;
+    font-size: 12px; /* Minska fontstorlek */
 }
 
 .time-slot {
-    margin-bottom: 20px;
+    margin-bottom: 10px; /* Minska avståndet mellan tidsslot */
     font-weight: bold;
+    font-size: 13px; /* Minska fontstorlek */
 }
 
 .todo-slot {
-    margin-bottom: 10px;
+    margin-bottom: 5px; /* Minska avståndet mellan todos */
 }
 
 .todo-item {
     display: flex;
     justify-content: space-between;
-    margin: 5px 0;
+    margin: 3px 0; /* Minska marginaler */
+    font-size: 12px; /* Minska fontstorlek */
 }
 
 .checkbox-label input {
-    margin-left: 10px;
+    margin-left: 5px;
 }
 
 .todo-item span {
@@ -44,38 +50,36 @@
 }
 
 .add-todo-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #426e5f;
-    color: white;
+    padding: 6px 12px; /* Minska padding */
+    font-size: 14px; /* Minska fontstorlek */
+    background-color: #F5F5DC;
+    color: black;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
 
 .add-todo-button:hover {
-    background-color: #426e5f;
+    background-color: #5d4747;
 }
 
 .todos-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .todos-table th,
 .todos-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
+    border: 1px solid black;
+    padding: 6px; /* Minska padding */
     text-align: left;
-}
-
-.todos-table th {
-    background-color: #f4f4f4;
+    background-color: #F5F5DC;
+    font-size: 12px; /* Minska fontstorlek för tabellen */
 }
 
 .all-day-row {
-    background-color: #f0f0f0;
+    background-color: #F5F5DC;
 }
 
 .todo-item {
@@ -86,18 +90,89 @@
     margin-left: 10px;
 }
 
-.add-todo-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #426e5f;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+/* Responsiv design för 1024 x 600 skärm */
+@media (max-width: 1024px) {
+    .day-view {
+        margin: 5px;
+    }
+
+    .time-grid {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .time-column {
+        width: 60px; /* Minska ännu mer för mindre skärmar */
+        font-size: 11px; /* Justera fontstorleken */
+    }
+
+    .todo-column {
+        font-size: 11px;
+    }
+
+    .time-slot {
+        margin-bottom: 8px; /* Minska avståndet */
+        font-size: 12px; /* Anpassa fontstorlek */
+    }
+
+    .todo-slot {
+        margin-bottom: 4px; /* Minska avståndet */
+    }
+
+    .todo-item {
+        margin: 3px 0;
+        font-size: 11px; /* Justera fontstorlek för små skärmar */
+    }
+
+    .add-todo-button {
+        padding: 5px 10px; /* Minska padding */
+        font-size: 12px; /* Minska fontstorlek */
+    }
+
+    .todos-table th,
+    .todos-table td {
+        padding: 5px; /* Minska padding för tabellen */
+        font-size: 11px; /* Minska fontstorlek */
+    }
+
+    /* Justera bredder på knappar och andra element */
+    .add-todo-button {
+        width: 100%;
+    }
+
+    .todos-table {
+        font-size: 11px;
+    }
 }
 
-.add-todo-button:hover {
-    background-color: #426e5f;
-}
+/* För mobila enheter (max-width: 600px) */
+@media (max-width: 600px) {
+    .day-view {
+        margin: 3px; /* Minska marginaler ännu mer för mindre enheter */
+    }
 
+    .time-column, .todo-column {
+        font-size: 10px; /* Justera fontstorlek ännu mer för mycket små skärmar */
+    }
+
+    .todo-item {
+        margin: 2px 0;
+        font-size: 10px;
+    }
+
+    .add-todo-button {
+        padding: 4px 8px; /* Minska padding ännu mer för små enheter */
+        font-size: 10px; /* Minska fontstorlek för mobiler */
+    }
+
+    .todos-table th,
+    .todos-table td {
+        padding: 4px; /* Minska padding i tabellen */
+        font-size: 10px; /* Anpassa fontstorlek */
+    }
+
+    .todos-table {
+        font-size: 10px; /* Justera fontstorlek på hela tabellen */
+    }
+}
 
