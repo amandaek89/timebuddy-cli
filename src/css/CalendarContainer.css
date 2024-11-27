@@ -9,50 +9,173 @@
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
+    box-sizing: border-box; /* För att undvika extra marginaler */
 }
+
 /* Själva kalendern */
 .calendar {
     width: 100%;
     margin: 0 auto;
     aspect-ratio: 16 / 8; /* Gör den liggande rektangulär */
-    background-color: white; /* Kalenderns bakgrund */
+    background-color: #f5f5dc; /* Kalenderns bakgrund */
     border-radius: 5px; /* Lätt avrundning */
     padding: 10px; /* Padding inuti kalendern */
     display: flex; /* För eventuell justering av innehåll */
     align-items: center;
     justify-content: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Lätt skugga */
+    box-sizing: border-box; /* För att hantera padding korrekt */
 }
+
 .fc {
     width: 100%;
     max-width: 100%;
-    background-color: white;
+    background-color: #f5f5dc;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Media Query för skärmar med maxbredd 768px (t.ex. surfplattor) */
+/* Anpassa headern */
+.fc-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Tillåt flexwrap för mindre skärmar */
+}
+
+.fc-toolbar-title {
+    flex: 1;
+    text-align: center; /* Centrera titeln */
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.fc-toolbar-chunk {
+    display: flex;
+    flex-wrap: nowrap; /* Gör knapparna vågrätta */
+    justify-content: center;
+    gap: 5px; /* Mellanrum mellan knappar */
+}
+
+/* Justera daygrid-cellerna i månadsvyn */
+.fc .fc-daygrid-body {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* 7 kolumner för dagarna i veckan */
+    grid-auto-rows: 1fr; /* Anpassa radens höjd för att fylla ut */
+}
+
+.fc-daygrid-day-frame {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Fördela innehåll vertikalt inom cellerna */
+}
+
+/* Anpassa marginaler och padding */
+.fc-daygrid-day-events {
+    margin: 0; /* Ta bort marginaler som kan skapa extra höjd */
+}
+
+.fc-daygrid-day {
+    padding: 2px; /* Justera paddingen för mindre utrymme i cellerna */
+}
+
+.fc-daygrid-day-number {
+    font-size: 0.8em; /* Anpassa textstorleken för dagnumren */
+}
+
+/* Specialanpassad för skärm med upplösning 1024x600 */
+@media (max-width: 1024px) and (max-height: 600px) {
+    .calendar {
+        width: 85%; /* Justera bredden för att passa bättre */
+        aspect-ratio: 16 / 9;/* Anpassad höjd/bredd */
+        padding: 8px; /* Minskad padding */
+    }
+
+    .fc .fc-daygrid-body {
+        grid-template-columns: repeat(7, minmax(0, 1fr)); /* Kolumner anpassar sig */
+        grid-auto-rows: minmax(50px, auto); /* Minimihöjd på cellerna */
+    }
+
+    .fc-daygrid-day-number {
+        font-size: 0.7em; /* Ytterligare minskning av textstorlek */
+    }
+}
+
+/* Media Query för skärmar med maxbredd 768px (surfplattor) */
 @media (max-width: 768px) {
     .calendar-container {
-        max-height: 70vh;  /* Justera kalenderns maxhöjd */
+        padding: 15px; /* Mindre padding */
     }
 
     .calendar {
-        width: 100%;  /* Håll kalendern fullbredd */
-        aspect-ratio: 16 / 9;
+        width: 100%; /* Full bredd */
+        aspect-ratio: 16 / 10; /* Lite högre än tidigare */
         padding: 10px;
     }
 }
 
-/* Media Query för skärmar med maxbredd 480px (t.ex. mobiltelefoner) */
+/* Media Query för skärmar med maxbredd 480px (mobiler) */
 @media (max-width: 480px) {
     .calendar-container {
-        max-height: 60vh;  /* Justera kalenderns maxhöjd ytterligare */
+        padding: 10px; /* Mindre padding */
     }
 
     .calendar {
         width: 100%;
-        aspect-ratio: 16 / 9;
-        padding: 8px;
+        aspect-ratio: unset; /* Ta bort tidigare proportioner */
+        padding: 5px; /* Minimerad padding */
+        display: grid; /* Gör hela kalendern till en grid */
+        grid-template-rows: auto auto; /* För rubrik och dagnamn */
+        grid-template-columns: 1fr; /* Allt i en kolumn */
+    }
+
+    /* Kalenderverktygsfältet (titel och knappar) */
+    .fc-toolbar {
+        grid-row: 1; /* Håll detta överst */
+        grid-column: 1;
+    }
+
+    .fc-toolbar-title {
+        font-size: 1em; /* Justera titelstorleken */
+        text-align: center; /* Centrerad titel */
+    }
+
+    .fc-button-group {
+        display: flex;
+        justify-content: center; /* Centrerar knapparna */
+        margin-top: 10px;
+    }
+
+    /* Dagar i en vertikal layout */
+    .fc-daygrid-body {
+        grid-row: 2; /* Lägg dagarna nedanför verktygsfältet */
+        grid-column: 1;
+        display: grid;
+        grid-template-columns: 1fr; /* En kolumn */
+        grid-auto-rows: minmax(60px, auto); /* Varje dag fyller ut och är minst 60px hög */
+    }
+
+    .fc-daygrid-day-frame {
+        height: 100%;
+        display: flex;
+        flex-direction: row; /* Gör innehållet horisontellt */
+        justify-content: space-between; /* Dela upp dagnummer och innehåll */
+        align-items: center;
+        padding: 5px;
+    }
+
+    .fc-daygrid-day-number {
+        font-size: 0.8em; /* Anpassad storlek för dagnummer */
+        font-weight: bold;
+    }
+
+    .fc-daygrid-day-events {
+        margin-top: 5px; /* Liten marginal för händelser */
+    }
+
+    .fc {
+        font-size: 0.8em; /* Minska den övergripande storleken */
     }
 }
+

@@ -35,7 +35,7 @@ const DayView = () => {
         try {
             await markTodoAsDone(todoId);
             setTodos((prevTodos) =>
-                prevTodos.map((todo) => (todo.id === todoId ? { ...todo, done } : todo))
+                prevTodos.map((todo) => (todo.id === todoId ? {...todo, done} : todo))
             );
         } catch (error) {
             console.error('Error marking todo as done:', error);
@@ -55,7 +55,7 @@ const DayView = () => {
             // Direkt lokal uppdatering för snabb feedback
             setTodos((prevTodos) =>
                 prevTodos.map((todo) =>
-                    todo.id === id ? { ...todo, ...updatedData } : todo
+                    todo.id === id ? {...todo, ...updatedData} : todo
                 )
             );
 
@@ -97,6 +97,7 @@ const DayView = () => {
 
     return (
         <div className="day-view">
+            {/* Header med knapp för att lägga till en ny todo */}
             <div className="header">
                 <button
                     className="add-todo-button"
@@ -106,8 +107,9 @@ const DayView = () => {
                 </button>
             </div>
 
+            {/* Kontrollera om data laddas */}
             {isLoading ? (
-                <p>Laddar...</p>
+                <p className="loading-message">Laddar...</p>
             ) : (
                 <table className="todos-table">
                     <thead>
@@ -118,13 +120,14 @@ const DayView = () => {
                     </tr>
                     </thead>
                     <tbody>
+                    {/* Dynamisk rendering av tidsblock och todos */}
                     {Array.from({ length: 10 }, (_, index) => {
                         const timeSlot = `${8 + index}:00`;
                         const todosForSlot = getTodosForTime(timeSlot);
 
                         return (
                             <tr key={timeSlot}>
-                                <td>{timeSlot}</td>
+                                <td className="time-slot">{timeSlot}</td>
                                 <td>
                                     {todosForSlot.map((todo) => (
                                         <div
@@ -132,7 +135,7 @@ const DayView = () => {
                                             className="todo-item"
                                             onClick={() => setSelectedTodo(todo)}
                                         >
-                                            <span>{todo.title}</span>
+                                            <span className="todo-title">{todo.title}</span>
                                         </div>
                                     ))}
                                 </td>
@@ -153,35 +156,46 @@ const DayView = () => {
                         );
                     })}
 
+                    {/* "Övrigt"-todos läggs som egna rader i tabellen */}
                     {getAllDayTodos().length > 0 && (
-                        <tr>
-                            <td colSpan="3" className="all-day-row">
-                                <h3>Övrigt</h3>
-                                {getAllDayTodos().map((todo) => (
+                        getAllDayTodos().map((todo) => (
+                            <tr key={todo.id}>
+                                <td className="time-slot">Övrigt</td>
+                                <td>
                                     <div
-                                        key={todo.id}
                                         className="todo-item"
                                         onClick={() => setSelectedTodo(todo)}
                                     >
-                                        <span>{todo.title}</span>
-                                        <label className="checkbox-label">
-                                            <input
-                                                type="checkbox"
-                                                checked={todo.done}
-                                                onChange={() =>
-                                                    handleCheckboxChange(todo.id, !todo.done)
-                                                }
-                                            />
-                                        </label>
+                                        <span className="todo-title">{todo.title}</span>
                                     </div>
-                                ))}
-                            </td>
+                                </td>
+                                <td>
+                                    <label className="checkbox-label">
+                                        <input
+                                            type="checkbox"
+                                            checked={todo.done}
+                                            onChange={() =>
+                                                handleCheckboxChange(todo.id, !todo.done)
+                                            }
+                                        />
+                                    </label>
+                                </td>
+                            </tr>
+                        ))
+                    )}
+
+                    {/* Om inga "Övrigt"-todos finns */}
+                    {getAllDayTodos().length === 0 && (
+                        <tr>
+                            <td colSpan="3">Inga händelser i övrigt</td>
                         </tr>
                     )}
                     </tbody>
                 </table>
             )}
 
+
+    {/* Modaler */}
             {selectedTodo && (
                 <TodoModal
                     todo={selectedTodo}
@@ -211,7 +225,7 @@ const DayView = () => {
             )}
         </div>
     );
-};
+}
 
 export default DayView;
 

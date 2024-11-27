@@ -6,7 +6,7 @@ html, body {
 .profile-page {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    min-height: 100vh;
     background-color: #426e5f;
 }
 

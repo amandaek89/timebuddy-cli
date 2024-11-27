@@ -40,9 +40,67 @@
     font-size: 12px; /* Minska fontstorlek */
 }
 
-.checkbox-label input {
-    margin-left: 5px;
+/* När checkboxen är ikryssad, stryk över hela todo-texten */
+.checkbox-label input:checked + .todo-title {
+    text-decoration: line-through; /* Stryk över texten */
+    color: #274f42; /* Grön färg för markerade todos */
+    font-style: italic; /* Gör texten kursiv */
 }
+
+/* Ta bort standardblå från checkboxen och ge den en anpassad stil */
+.checkbox-label input {
+    -webkit-appearance: none; /* Tar bort standard utseende på checkbox */
+    -moz-appearance: none;    /* Firefox */
+    appearance: none;         /* För alla andra */
+    width: 16px;              /* Ställ in en egen bredd */
+    height: 16px;             /* Ställ in en egen höjd */
+    border: 2px solid #5d4747; /* Sätt en egen kantfärg */
+    border-radius: 3px;       /* Rundade hörn på checkboxen */
+    margin-right: 8px;        /* Litet avstånd till todo-texten */
+    cursor: pointer;         /* Lägg till en pekare när man hovrar */
+    background-color: #fff;   /* Sätt bakgrundsfärg */
+}
+
+/* Ändra checkboxens stil när den är ikryssad */
+.checkbox-label input:checked {
+    background-color: #5d4747; /* Bakgrundsfärg när checkboxen är ikryssad */
+    border-color: #5d4747;      /* Matchande kantfärg */
+}
+
+/* När checkboxen är ikryssad, gör ikonen till en bock */
+.checkbox-label input:checked::after {
+    content: "✔";              /* Visa bocksymbol */
+    font-size: 12px;            /* Justera storlek på bocken */
+    color: #fff;                /* Vit färg på bocken */
+    display: block;
+    text-align: center;         /* Centrerad bocksymbol */
+    line-height: 16px;          /* Centrerad vertikalt */
+}
+
+/* Layoutjustering för checkboxlabel */
+.checkbox-label {
+    display: flex;
+    align-items: center; /* Säkerställ att checkboxen och texten är på samma linje */
+}
+
+.todo-title {
+    flex-grow: 1;
+    cursor: pointer; /* Gör todo-texten klickbar */
+}
+
+/* Ändra storlek och textstil på todos */
+.todo-item span {
+    font-size: 14px; /* Öka fontstorlek för todo-text */
+    font-weight: bold; /* Gör texten fet */
+    font-family: 'Arial', sans-serif; /* Byt till Arial */
+    color: #5d4747; /* Mörkare färg för att framhäva todos */
+    cursor: pointer; /* Lägg till pekare för interaktiv känsla */
+}
+
+.todo-item span:hover {
+    color: #274f42; /* Ändra färg vid hover */
+}
+
 
 .todo-item span {
     flex-grow: 1;
@@ -51,7 +109,7 @@
 
 .add-todo-button {
     padding: 6px 12px; /* Minska padding */
-    font-size: 14px; /* Minska fontstorlek */
+    font-size: 20px; /* Minska textstorlek */
     background-color: #F5F5DC;
     color: black;
     border: none;
@@ -75,7 +133,7 @@
     padding: 6px; /* Minska padding */
     text-align: left;
     background-color: #F5F5DC;
-    font-size: 12px; /* Minska fontstorlek för tabellen */
+    font-size: 15px; /* Minska fontstorlek för tabellen */
 }
 
 .all-day-row {
@@ -88,10 +146,11 @@
 
 .checkbox-label {
     margin-left: 10px;
+    color: #274f42;
 }
 
 /* Responsiv design för 1024 x 600 skärm */
-@media (max-width: 1024px) {
+@media (max-width: 1025px) {
     .day-view {
         margin: 5px;
     }
@@ -103,16 +162,16 @@
 
     .time-column {
         width: 60px; /* Minska ännu mer för mindre skärmar */
-        font-size: 11px; /* Justera fontstorleken */
+        font-size: 15px; /* Justera fontstorleken */
     }
 
     .todo-column {
-        font-size: 11px;
+        font-size: 15px;
     }
 
     .time-slot {
         margin-bottom: 8px; /* Minska avståndet */
-        font-size: 12px; /* Anpassa fontstorlek */
+        font-size: 15px; /* Anpassa fontstorlek */
     }
 
     .todo-slot {
@@ -121,38 +180,40 @@
 
     .todo-item {
         margin: 3px 0;
-        font-size: 11px; /* Justera fontstorlek för små skärmar */
+        font-size: 15px; /* Justera fontstorlek för små skärmar */
     }
 
     .add-todo-button {
         padding: 5px 10px; /* Minska padding */
-        font-size: 12px; /* Minska fontstorlek */
+        font-size: 15px; /* Minska fontstorlek */
     }
 
     .todos-table th,
     .todos-table td {
         padding: 5px; /* Minska padding för tabellen */
-        font-size: 11px; /* Minska fontstorlek */
+        font-size: 14px; /* Minska fontstorlek */
+        color: #261a1a;
     }
 
     /* Justera bredder på knappar och andra element */
     .add-todo-button {
         width: 100%;
+        color: #261a1a;
     }
 
     .todos-table {
-        font-size: 11px;
+        font-size: 15px;
     }
 }
 
 /* För mobila enheter (max-width: 600px) */
-@media (max-width: 600px) {
+@media (max-width: 600px) and (max-height: 400px) {
     .day-view {
         margin: 3px; /* Minska marginaler ännu mer för mindre enheter */
     }
 
     .time-column, .todo-column {
-        font-size: 10px; /* Justera fontstorlek ännu mer för mycket små skärmar */
+        font-size: 6px; /* Justera fontstorlek ännu mer för mycket små skärmar */
     }
 
     .todo-item {
@@ -167,7 +228,7 @@
 
     .todos-table th,
     .todos-table td {
-        padding: 4px; /* Minska padding i tabellen */
+        padding: 8px; /* Minska padding i tabellen */
         font-size: 10px; /* Anpassa fontstorlek */
     }
 
