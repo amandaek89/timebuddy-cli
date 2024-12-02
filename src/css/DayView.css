@@ -58,7 +58,7 @@
     border-radius: 3px;       /* Rundade hörn på checkboxen */
     margin-right: 8px;        /* Litet avstånd till todo-texten */
     cursor: pointer;         /* Lägg till en pekare när man hovrar */
-    background-color: #fff;   /* Sätt bakgrundsfärg */
+    background-color: #9f90a9;   /* Sätt bakgrundsfärg */
 }
 
 /* Ändra checkboxens stil när den är ikryssad */
@@ -115,6 +115,7 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    width: 100%;
 }
 
 .add-todo-button:hover {
@@ -149,62 +150,6 @@
     color: #274f42;
 }
 
-/* Responsiv design för 1024 x 600 skärm */
-@media (max-width: 1025px) {
-    .day-view {
-        margin: 5px;
-    }
-
-    .time-grid {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .time-column {
-        width: 60px; /* Minska ännu mer för mindre skärmar */
-        font-size: 15px; /* Justera fontstorleken */
-    }
-
-    .todo-column {
-        font-size: 15px;
-    }
-
-    .time-slot {
-        margin-bottom: 8px; /* Minska avståndet */
-        font-size: 15px; /* Anpassa fontstorlek */
-    }
-
-    .todo-slot {
-        margin-bottom: 4px; /* Minska avståndet */
-    }
-
-    .todo-item {
-        margin: 3px 0;
-        font-size: 15px; /* Justera fontstorlek för små skärmar */
-    }
-
-    .add-todo-button {
-        padding: 5px 10px; /* Minska padding */
-        font-size: 15px; /* Minska fontstorlek */
-    }
-
-    .todos-table th,
-    .todos-table td {
-        padding: 5px; /* Minska padding för tabellen */
-        font-size: 14px; /* Minska fontstorlek */
-        color: #261a1a;
-    }
-
-    /* Justera bredder på knappar och andra element */
-    .add-todo-button {
-        width: 100%;
-        color: #261a1a;
-    }
-
-    .todos-table {
-        font-size: 15px;
-    }
-}
 
 /* För mobila enheter (max-width: 600px) */
 @media (max-width: 600px) and (max-height: 400px) {

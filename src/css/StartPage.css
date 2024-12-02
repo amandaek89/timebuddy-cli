@@ -7,7 +7,7 @@
 
 /* Vänster panel */
 .left-panel {
-    width: 50%; /* Sätt bredden till 30% för vänster panel */
+    width: 40%; /* Sätt bredden till 30% för vänster panel */
     padding: 20px;
     background-color: #426e5f;
     color: #261a1a;
@@ -32,7 +32,7 @@
 /* För att centrera dayView i högerpanelen */
 /* Höger panel */
 .right-panel {
-    width: 50%;
+    width: 60%;
     padding: 20px;
     background-color: #426e5f;
     display: flex;
@@ -77,8 +77,13 @@
         height: auto; /* Låt höjden justeras så att den passar innehållet */
     }
 
-    .left-panel, .right-panel {
-        width: 100%; /* Båda panelerna tar upp 100% av bredden */
+    .left-panel {
+        width: 40%; /* Ta upp hela bredden på mindre skärmar */
+        padding: 10px; /* Justera padding för att optimera utrymmet */
+    }
+
+    .right-panel {
+        width: 60%; /* Båda panelerna tar upp 100% av bredden */
         padding: 10px; /* Justera padding för att optimera utrymmet */
     }
 
