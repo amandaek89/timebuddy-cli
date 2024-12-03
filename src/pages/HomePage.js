@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Importera useNavigate för omdirigering
 import RegisterForm from '../components/RegisterForm';
 import LoginForm from '../components/LoginForm';
+import { login } from '../services/AuthenticationService'; // Importera login-funktionen
 import '../css/Media-queries.css';
 
 const HomePage = () => {
     const [isLogin, setIsLogin] = useState(true);
     const [isVisible, setIsVisible] = useState(false);
+    const navigate = useNavigate(); // Skapa en navigeringsfunktion
 
     const handleLoginClick = () => {
         setIsVisible(true);
@@ -17,18 +20,35 @@ const HomePage = () => {
         setIsLogin(false);
     };
 
+    const handleFormSubmit = async (e) => {
+        e.preventDefault();
+        if (isLogin) {
+            // Hämta användarnamn och lösenord från formuläret
+            const username = e.target.username.value; // Använd dessa fält från LoginForm-komponenten
+            const password = e.target.password.value;
+
+            // Anropa login-funktionen från authService
+            const isLoggedIn = await login(username, password);
+
+            if (isLoggedIn) {
+                navigate('/startpage'); // Navigera till StartPage när inloggningen lyckas
+            } else {
+                alert('Login failed, please try again.');
+            }
+        } else {
+            // Om användaren registrerar sig, kan du anropa register-funktionen här
+            navigate('/'); // Navigera till startsidan eller en annan sida vid registrering
+        }
+    };
+
     return (
         <div style={styles.container}>
             {/* Navbar */}
             <header style={styles.navbar}>
-                <button
-                    style={styles.navButton}
-                    onClick={handleLoginClick}>
+                <button style={styles.navButton} onClick={handleLoginClick}>
                     Login
                 </button>
-                <button
-                    style={styles.navButton}
-                    onClick={handleRegisterClick}>
+                <button style={styles.navButton} onClick={handleRegisterClick}>
                     Register
                 </button>
             </header>
@@ -42,10 +62,16 @@ const HomePage = () => {
                 {isVisible && (
                     <div style={styles.card}>
                         <h2>{isLogin ? 'Logga in' : 'Registrera'}</h2>
-                        {isLogin ? <LoginForm /> : <RegisterForm />}
+                        <form onSubmit={handleFormSubmit}>
+                            {isLogin ? <LoginForm /> : <RegisterForm />}
+                            <button type="submit" style={styles.submitButton}>
+                                {isLogin ? 'Logga in' : 'Registrera'}
+                            </button>
+                        </form>
                         <button
                             style={styles.toggleButton}
-                            onClick={() => setIsLogin(!isLogin)}>
+                            onClick={() => setIsLogin(!isLogin)}
+                        >
                             {isLogin
                                 ? "Har du inget konto? Registrera dig"
                                 : "Har du redan ett konto? Logga in"}
@@ -86,9 +112,6 @@ const styles = {
         textDecoration: 'none',
         transition: 'color 0.3s',
     },
-    navButtonHover: {
-        color: '#ffffff',
-    },
     mainContent: {
         flex: 1,
         display: 'flex',
@@ -99,7 +122,7 @@ const styles = {
         color: '#426e5f',
     },
     card: {
-        backgroundColor: '#ffffff',
+        backgroundColor: '#a4a0a0',
         boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
         borderRadius: '10px',
         padding: '30px',
@@ -117,7 +140,7 @@ const styles = {
         marginBottom: '40px',
         fontSize: '20px',
         fontWeight: 'normal',
-        color: '#6c757d',
+        color: '#897f93',
     },
     toggleButton: {
         backgroundColor: '#426e5f',
@@ -130,8 +153,15 @@ const styles = {
         marginTop: '20px',
         transition: 'background-color 0.3s',
     },
-    toggleButtonHover: {
-        backgroundColor: '#375349',
+    submitButton: {
+        backgroundColor: '#426e5f',
+        color: '#F5F5DC',
+        padding: '10px 20px',
+        border: 'none',
+        borderRadius: '5px',
+        fontSize: '16px',
+        cursor: 'pointer',
+        marginTop: '20px',
+        transition: 'background-color 0.3s',
     },
 };
-

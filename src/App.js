@@ -10,8 +10,19 @@ function App() {
     const [isAuth, setIsAuth] = useState(false);
 
     useEffect(() => {
-        setIsAuth(isAuthenticated()); // Kontrollera om användaren är autentiserad
-    }, []);
+        const checkAuthStatus = () => {
+            // Kontrollera om användaren är autentiserad
+            const authStatus = isAuthenticated();
+            setIsAuth(authStatus);
+        };
+
+        checkAuthStatus(); // Kolla autentiseringstatus vid inläsning
+
+        // Om användaren precis har loggat in, omdirigera till StartPage
+        if (isAuth) {
+            <Navigate to="/startpage" />
+        }
+    }, [isAuth]); // Uppdatera statusen när den ändras
 
     return (
         <TodosProvider>  {/* Flytta TodosProvider här för att omge hela Router */}
@@ -35,4 +46,3 @@ function App() {
 }
 
 export default App;
-
