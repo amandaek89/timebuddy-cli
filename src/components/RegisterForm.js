@@ -7,40 +7,47 @@ const RegisterForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(username);
-        const success = await register(username, password);
-        if (success) {
-            console.log('User registered');
-            alert('User registered. Log in to continue')
-        } else {
-            alert('Registration failed. ')
+        try {
+            const success = await register(username, password);
+            if (success) {
+                alert('User registered. Please log in.');
+            } else {
+                alert('Registration failed.');
+            }
+        } catch (error) {
+            console.error('Registration error:', error);
+            alert('Registration failed due to a server issue.');
         }
-    }
+    };
 
     return (
         <div className="container">
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
-                    <label form="username">Username</label>
-                    <input type="username"
+                    <label htmlFor="username">Username</label>
+                    <input
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
+                        type="text"
                         className="form-control"
-                        id="email"
-                        placeholder="Enter username"></input>
+                        id="username"
+                        placeholder="Enter username"
+                    />
                 </div>
                 <div className="form-group">
-                    <label form="pwd">Password:</label>
-                    <input type="password"
+                    <label htmlFor="password">Password</label>
+                    <input
                         value={password}
-                        onChange={(e) => { setPassword(e.target.value) }}
+                        onChange={(e) => setPassword(e.target.value)}
+                        type="password"
                         className="form-control"
-                        id="pwd"
-                        placeholder="Enter password"></input>
+                        id="password"
+                        placeholder="Enter password"
+                    />
                 </div>
-                <div className="checkbox">
-                </div>
-                <button type="submit" className="btn btn-info">Register</button>
+                <button type="submit" className="btn btn-info">
+                    Register
+                </button>
             </form>
         </div>
     );

@@ -33,14 +33,16 @@ const DayView = () => {
 
     const handleCheckboxChange = async (todoId, done) => {
         try {
-            await markTodoAsDone(todoId);
+            await markTodoAsDone(todoId, done);  // Pass the correct 'done' value
             setTodos((prevTodos) =>
-                prevTodos.map((todo) => (todo.id === todoId ? {...todo, done} : todo))
+                prevTodos.map((todo) =>
+                    (todo.id === todoId ? {...todo, done} : todo))
             );
         } catch (error) {
             console.error('Error marking todo as done:', error);
         }
     };
+
 
     const handleEditClick = (todo) => {
         setSelectedTodo(null); // Stäng detaljmodal

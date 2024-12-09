@@ -41,25 +41,25 @@ const StartPage = () => {
     return (
         <div className="start-page">
             {/* Header */}
-            <HeaderAuthenticated /> {/* Lägg till headern överst */}
+            <HeaderAuthenticated/> {/* Lägg till headern överst */}
 
-            <div className="content">
-                <div className="left-panel">
-                    <div className="clock">
-                        <h2>Klocka</h2>
-                        <p>{formattedTime}</p>
-                    </div>
-                    <div className="date-info">
-                        <p>{formattedDate}</p>
-                        <p>Vecka: {weekNumber}</p>
-                    </div>
+            <div className="left-panel">
+                <div className="clock">
+                    <p>{formattedTime}</p>
                 </div>
-                <div className="right-panel">
-                    <DayView selectedDate={selectedDate} /> {/* Skicka valfritt datum till DayView */}
+                <div className="date-info">
+                    <p className="date">{formattedDate}</p> {/* Datum */}
+                </div>
+                <div className="week-number">
+                    <p>Vecka: {weekNumber}</p> {/* Veckonummer */}
                 </div>
             </div>
+
+            <div className="right-panel">
+                <DayView selectedDate={selectedDate}/> {/* Skicka valfritt datum till DayView */}
+            </div>
         </div>
-    );
+);
 };
 
 export default StartPage;
