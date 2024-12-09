@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import RegisterForm from '../components/RegisterForm';
 import LoginForm from '../components/LoginForm';
 import '../css/Media-queries.css';
+import '../css/HomePage.css';
 
 const HomePage = () => {
     const [isLogin, setIsLogin] = useState(true);
     const [isVisible, setIsVisible] = useState(false);
+    const navigate = useNavigate();
 
     const handleLoginClick = () => {
         setIsVisible(true);
@@ -18,37 +21,38 @@ const HomePage = () => {
     };
 
     return (
-        <div style={styles.container}>
+        <div className="container">
             {/* Navbar */}
-            <header style={styles.navbar}>
-                <button
-                    style={styles.navButton}
-                    onClick={handleLoginClick}>
+            <header className="navbar">
+                <button className="navButton" onClick={handleLoginClick}>
                     Login
                 </button>
-                <button
-                    style={styles.navButton}
-                    onClick={handleRegisterClick}>
+                <button className="navButton" onClick={handleRegisterClick}>
                     Register
                 </button>
             </header>
 
             {/* Main Content */}
-            <main style={styles.mainContent}>
-                <h1 style={styles.title}>TimeBuddy</h1>
-                <h2 style={styles.subtitle}>För ett strukturerat liv</h2>
+            <main className="mainContent">
+                <h1 className="title">TimeBuddy</h1>
+                <h2 className="subtitle">För ett strukturerat liv</h2>
 
                 {/* Form Card */}
                 {isVisible && (
-                    <div style={styles.card}>
+                    <div className="card">
                         <h2>{isLogin ? 'Logga in' : 'Registrera'}</h2>
-                        {isLogin ? <LoginForm /> : <RegisterForm />}
+                        {isLogin ? (
+                            <LoginForm navigate={navigate} />
+                        ) : (
+                            <RegisterForm />
+                        )}
                         <button
-                            style={styles.toggleButton}
-                            onClick={() => setIsLogin(!isLogin)}>
+                            className="toggleButton"
+                            onClick={() => setIsLogin(!isLogin)}
+                        >
                             {isLogin
-                                ? "Har du inget konto? Registrera dig"
-                                : "Har du redan ett konto? Logga in"}
+                                ? 'Har du inget konto? Registrera dig'
+                                : 'Har du redan ett konto? Logga in'}
                         </button>
                     </div>
                 )}
@@ -58,80 +62,3 @@ const HomePage = () => {
 };
 
 export default HomePage;
-
-// Stilar för komponenten
-const styles = {
-    container: {
-        display: 'flex',
-        flexDirection: 'column',
-        height: '100vh',
-    },
-    navbar: {
-        backgroundColor: '#426e5f',
-        color: '#F5F5DC',
-        padding: '10px 20px',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    navButton: {
-        backgroundColor: 'transparent',
-        color: '#F5F5DC',
-        border: 'none',
-        fontSize: '18px',
-        fontWeight: 'bold',
-        cursor: 'pointer',
-        padding: '10px 20px',
-        margin: '0 10px',
-        textDecoration: 'none',
-        transition: 'color 0.3s',
-    },
-    navButtonHover: {
-        color: '#ffffff',
-    },
-    mainContent: {
-        flex: 1,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        textAlign: 'center',
-        color: '#426e5f',
-    },
-    card: {
-        backgroundColor: '#ffffff',
-        boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
-        borderRadius: '10px',
-        padding: '30px',
-        maxWidth: '400px',
-        width: '100%',
-        textAlign: 'center',
-        marginTop: '20px',
-    },
-    title: {
-        marginBottom: '20px',
-        fontSize: '32px',
-        fontWeight: 'bold',
-    },
-    subtitle: {
-        marginBottom: '40px',
-        fontSize: '20px',
-        fontWeight: 'normal',
-        color: '#6c757d',
-    },
-    toggleButton: {
-        backgroundColor: '#426e5f',
-        color: '#F5F5DC',
-        padding: '10px 20px',
-        border: 'none',
-        borderRadius: '5px',
-        fontSize: '16px',
-        cursor: 'pointer',
-        marginTop: '20px',
-        transition: 'background-color 0.3s',
-    },
-    toggleButtonHover: {
-        backgroundColor: '#375349',
-    },
-};
-

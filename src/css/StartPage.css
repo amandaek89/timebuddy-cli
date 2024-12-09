@@ -1,45 +1,58 @@
 /* Grundläggande styling för startsidan */
 .start-page {
-    display: flex;
-    min-height: 100vh; /* Gör hela sidan till höjd 100% */
+    display: flex; /* Använd flexbox för att dela upp sidan i två paneler */
+    min-height: 100vh;
     background-color: #426e5f;
 }
 
 /* Vänster panel */
 .left-panel {
-    width: 40%; /* Sätt bredden till 30% för vänster panel */
-    padding: 20px;
+    width: 30%; /* Vänster panel tar upp 40% av skärmen */
+    padding: 10px;
     background-color: #426e5f;
     color: #261a1a;
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Ordna innehållet vertikalt */
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    box-sizing: border-box;
+    margin-left: -10px;
+}
+/* Klocka, dag, datum och vecka */
+.time-date-week {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: flex-start;
 }
 
-/* Klocka och vecka */
 .clock {
-    font-size: 2em;
+    font-size: 55px; /* Stora siffror för klockan */
+    font-weight: bold;
+    color: #261a1a;
     margin-bottom: 20px;
-
 }
 
 .date-info {
-    font-size: 1.2em;
+    font-size: 23px;
+    color: #261a1a;
+    margin-bottom: 10px;
 }
 
-/* Höger panel */
-/* För att centrera dayView i högerpanelen */
+.week-number {
+    font-size: 25px;
+    color: #261a1a;
+}
 /* Höger panel */
 .right-panel {
-    width: 60%;
-    padding: 20px;
+    width: 70%; /* Höger panel tar upp 60% av skärmen */
+    padding: 40px;
     background-color: #426e5f;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* Se till att dayView hamnar högst upp */
+    justify-content: flex-start;
     align-items: center;
-    height: 100%; /* Sätt höjden på högerpanelen för att säkerställa att den fyller hela höjden */
+    box-sizing: border-box;
 }
 
 /* Day View */
@@ -47,89 +60,15 @@
     display: flex;
     flex-direction: column;
     margin: 20px;
-    width: 100%; /* Gör dayView flexibel så att den anpassar sig till panelens bredd */
-    max-width: 800px; /* Max bredd för dayView */
-    padding-top: 50px; /* Padding på toppen för att skapa utrymme ovanför */
+    width: 100%;
+    max-width: 800px; /* Maximal bredd för DayView */
+    padding-top: 50px;
 }
 
-
-
-.start-page {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-
-.content {
-    display: flex;
-    flex: 1;
-}
-
-.left-panel, .right-panel {
-    padding: 20px;
-}
-
-/* Responsiv design */
-/* Lägg till för 1024x600-skärm */
-@media (max-width: 1024px) and (max-height: 600px) {
-    .start-page {
-        flex-direction: column; /* Byt till kolumnlayout för att passa i en vertikal layout */
-        height: auto; /* Låt höjden justeras så att den passar innehållet */
-    }
-
-    .left-panel {
-        width: 40%; /* Ta upp hela bredden på mindre skärmar */
-        padding: 10px; /* Justera padding för att optimera utrymmet */
-    }
-
-    .right-panel {
-        width: 60%; /* Båda panelerna tar upp 100% av bredden */
-        padding: 10px; /* Justera padding för att optimera utrymmet */
-    }
-
-    .clock {
-        font-size: 1.6em; /* Minska fontstorleken på klockan så att den passar */
-    }
-
-    .date-info {
-        font-size: 1em; /* Minska fontstorleken på datumet */
-    }
-}
-
+/* Responsiv design - För skärmar under 1024px */
 @media (max-width: 1024px) {
-    .start-page {
-        flex-direction: column; /* Byt till kolumnlayout för skärmar under 1024px */
-    }
-    .left-panel {
-        width: 100%; /* Ta upp 100% av bredden vid mindre skärmar */
-        padding: 10px; /* Mindre padding för att optimera utrymmet */
-    }
 
-    .right-panel {
-        width: 100%; /* Ta upp 100% av bredden vid mindre skärmar */
-        height: 70%;
-        padding: 10px; /* Mindre padding för att optimera utrymmet */
-    }
-
-    .clock {
-        font-size: 1.5em; /* Minska fontstorleken på klockan */
-    }
-
-    .date-info {
-        font-size: 1em; /* Minska fontstorleken på datumet */
-    }
-}
-
-@media (max-width: 480px) {
     .left-panel, .right-panel {
-        padding: 15px; /* Justera padding på ännu mindre skärmar */
-    }
-
-    .clock {
-        font-size: 1.2em; /* Ytterligare minskning av fontstorlek */
-    }
-
-    .date-info {
-        font-size: 0.9em; /* Minska fontstorleken ytterligare på mobiler */
+        width: 100%; /* Panelerna tar upp hela bredden på mindre skärmar */
     }
 }

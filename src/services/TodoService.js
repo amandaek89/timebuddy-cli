@@ -11,7 +11,6 @@ const getAuthToken = () => {
     return token;
 };
 
-// Uppdatera en todo
 export const updateTodo = async (id, updatedTodo) => {
     const token = getAuthToken();
     try {
@@ -31,7 +30,6 @@ export const updateTodo = async (id, updatedTodo) => {
     }
 };
 
-// Ta bort en todo
 export const deleteTodo = async (id) => {
     const token = getAuthToken();
     try {
@@ -47,12 +45,11 @@ export const deleteTodo = async (id) => {
     }
 };
 
-// Markera todo som klar
-export const markTodoAsDone = async (id) => {
+export const markTodoAsDone = async (id, done) => {  // Accept 'done' parameter
     const token = getAuthToken();
     try {
         const response = await axios.patch(
-            `${API_BASE_URL}/${id}/done`,
+            `${API_BASE_URL}/${id}/${done}`, // Pass 'done' directly to the URL
             {},
             {
                 headers: {
@@ -67,25 +64,6 @@ export const markTodoAsDone = async (id) => {
     }
 };
 
-// Markera todo som inte klar
-export const markTodoAsNotDone = async (id) => {
-    const token = getAuthToken();
-    try {
-        const response = await axios.patch(
-            `${API_BASE_URL}/${id}/not-done`,
-            {},
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            }
-        );
-        return response.data;
-    } catch (error) {
-        console.error('Error marking todo as not done:', error);
-        throw error;
-    }
-};
 export const getAllTodos = async () => {
     const token = getAuthToken();
     try {

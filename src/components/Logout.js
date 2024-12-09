@@ -6,7 +6,7 @@ function Logout() {
 
     const handleClick = async () => {
         localStorage.removeItem('token');
-        navigate('/');
+        window.location.href = '/'; // Omdirigera användaren till home page
     }
 
     return (

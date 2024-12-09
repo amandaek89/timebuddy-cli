@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Logout from './Logout';
-import '../css/HeaderAuthenticated.css'; // Importera den separata CSS-filen
+import '../css/HeaderAuthenticated.css';
 
 function HeaderAuthenticated() {
     return (

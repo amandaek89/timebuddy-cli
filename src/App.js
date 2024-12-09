@@ -4,35 +4,37 @@ import HomePage from './pages/HomePage';
 import StartPage from './pages/StartPage';
 import ProfilePage from './pages/ProfilePage';
 import { isAuthenticated } from './services/AuthenticationService';
-import { TodosProvider } from './context/TodosContext';  // Importera TodosProvider
 
 function App() {
     const [isAuth, setIsAuth] = useState(false);
 
     useEffect(() => {
-        setIsAuth(isAuthenticated()); // Kontrollera om användaren är autentiserad
-    }, []);
+        const checkAuthStatus = () => {
+            // Kontrollera om användaren är autentiserad (baserat på token i localStorage eller annan metod)
+            const authStatus = isAuthenticated();
+            setIsAuth(authStatus);
+        };
+
+        checkAuthStatus(); // Kolla autentiseringstatus vid inläsning
+    }, []); // Kör bara en gång vid inläsning
 
     return (
-        <TodosProvider>  {/* Flytta TodosProvider här för att omge hela Router */}
-            <Router>
-                <Routes>
-                    {/* Hem-sidan (för inloggning och registrering), tillgänglig för alla */}
-                    <Route path="/" element={!isAuth ? <HomePage /> : <Navigate to="/startpage" />} />
+        <Router>
+            <Routes>
+                {/* Hem-sidan (för inloggning och registrering), tillgänglig för alla */}
+                <Route path="/" element={!isAuth ? <HomePage /> : <Navigate to="/startpage" />} />
 
-                    {/* Start-sidan, tillgänglig endast om användaren är autentiserad */}
-                    <Route path="/startpage" element={isAuth ? <StartPage /> : <Navigate to="/" />} />
+                {/* Start-sidan, tillgänglig endast om användaren är autentiserad */}
+                <Route path="/startpage" element={isAuth ? <StartPage /> : <Navigate to="/" />} />
 
-                    {/* Profil-sidan, tillgänglig endast om användaren är autentiserad */}
-                    <Route path="/profilepage" element={isAuth ? <ProfilePage /> : <Navigate to="/" />} />
+                {/* Profil-sidan, tillgänglig endast om användaren är autentiserad */}
+                <Route path="/profilepage" element={isAuth ? <ProfilePage /> : <Navigate to="/" />} />
 
-                    {/* Fångar alla andra vägar, och omdirigerar till HomePage om användaren inte är autentiserad */}
-                    <Route path="/*" element={<Navigate to="/" />} />
-                </Routes>
-            </Router>
-        </TodosProvider>
+                {/* Fångar alla andra vägar, och omdirigerar till HomePage om användaren inte är autentiserad */}
+                <Route path="/*" element={<Navigate to="/" />} />
+            </Routes>
+        </Router>
     );
 }
 
 export default App;
-

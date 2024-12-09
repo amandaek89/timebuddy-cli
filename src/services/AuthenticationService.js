@@ -54,15 +54,9 @@ export const register = async (username, password) => {
     }
 };
 
+// AuthenticationService.js
 export const isAuthenticated = () => {
     const token = localStorage.getItem('token');
-    console.log('Token in localStorage:', token);
-    if (!token) return false;
-
-    try {
-        const payload = JSON.parse(atob(token.split('.')[1]));
-        return payload.exp * 1000 > Date.now(); // Kontrollera om token inte är utgången
-    } catch {
-        return false;
-    }
+    return !!token;
 };
+
