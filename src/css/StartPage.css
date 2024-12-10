@@ -1,29 +1,41 @@
 /* Grundläggande styling för startsidan */
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif; /* Standardfont */
+}
+
+/* Behållare för hela sidan */
 .start-page {
-    display: flex; /* Använd flexbox för att dela upp sidan i två paneler */
-    min-height: 100vh;
-    background-color: #426e5f;
+    display: flex;
+    flex-direction: column; /* Header högst upp och panelerna under */
+    min-height: 100vh; /* Full höjd för att fylla hela skärmen */
+}
+
+/* Content: vänster och höger panel */
+.content {
+    display: flex; /* Låt vänster och höger panel vara på samma rad */
+    flex: 1; /* Gör att panelerna tar upp all tillgänglig plats under headern */
 }
 
 /* Vänster panel */
 .left-panel {
-    width: 30%; /* Vänster panel tar upp 40% av skärmen */
-    padding: 10px;
+    width: 40%; /* Vänster panel tar upp 30% av skärmen */
+    padding: 20px;
     background-color: #426e5f;
     color: #261a1a;
     display: flex;
-    flex-direction: column; /* Ordna innehållet vertikalt */
-    justify-content: center;
-    align-items: flex-start;
+    flex-direction: column;
+    justify-content: flex-start;
     box-sizing: border-box;
-    margin-left: -10px;
 }
+
 /* Klocka, dag, datum och vecka */
 .time-date-week {
     display: flex;
     flex-direction: column;
     width: 100%;
-    align-items: flex-start;
+    align-items: center;
 }
 
 .clock {
@@ -43,9 +55,10 @@
     font-size: 25px;
     color: #261a1a;
 }
+
 /* Höger panel */
 .right-panel {
-    width: 70%; /* Höger panel tar upp 60% av skärmen */
+    width: 60%; /* Höger panel tar upp 70% av skärmen */
     padding: 40px;
     background-color: #426e5f;
     display: flex;
@@ -66,9 +79,16 @@
 }
 
 /* Responsiv design - För skärmar under 1024px */
-@media (max-width: 1024px) {
+@media (max-width: 500px) {
+    .start-page {
+        flex-direction: column; /* Gör layouten vertikal på små skärmar */
+    }
+
+    .content {
+        flex-direction: column; /* Panelerna tar hela bredden på små skärmar */
+    }
 
     .left-panel, .right-panel {
-        width: 100%; /* Panelerna tar upp hela bredden på mindre skärmar */
+        width: 100%; /* Panelerna tar upp hela bredden på små skärmar */
     }
 }
