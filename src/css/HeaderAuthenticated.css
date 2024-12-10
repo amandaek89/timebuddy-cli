@@ -50,6 +50,7 @@
 
 /* Hover-effekt för profilknappen */
 .profile-button:hover {
+    background: none;
     color: #261a1a; /* Ändrar färg på hover */
     transform: scale(1.1); /* Förstorar ikonen vid hover */
 }
