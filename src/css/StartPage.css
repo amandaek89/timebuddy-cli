@@ -31,14 +31,14 @@ html, body {
 }
 
 .clock {
-    font-size: 55px; /* Stora siffror för klockan */
+    font-size: 60px; /* Stora siffror för klockan */
     font-weight: bold;
     color: #261a1a;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .date-info {
-    font-size: 23px;
+    font-size: 25px;
     color: #261a1a;
     margin-bottom: 10px;
 }
