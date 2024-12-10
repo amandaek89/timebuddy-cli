@@ -28,62 +28,6 @@ html, body {
     max-width: 1200px; /* Optional: Begränsa maxbredden */
 }
 
-/* Modal-overlay för att dämpa bakgrunden */
-.password-modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);  /* Skapar bakgrundsskugga */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;  /* Säkerställer att modalen ligger ovanpå */
-}
-
-/* Själva modalen */
-.password-form {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    width: 400px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    z-index: 1001; /* Sätter modalens z-index så att den ligger ovanpå overlay */
-}
-
-/* Inmatningsfält för lösenord */
-.password-form input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-/* Lösenordsuppdatering knapp */
-.password-form button {
-    padding: 10px 20px;
-    background: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.password-form button.close-button {
-    background: #f44336;
-}
-
-/* Fel- och successmeddelanden */
-.error-message {
-    color: red;
-}
-
-.success-message {
-    color: green;
-}
-
 /* Profilknappen */
 .profile-button {
     position: fixed;

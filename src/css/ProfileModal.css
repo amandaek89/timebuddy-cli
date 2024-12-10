@@ -1,27 +1,129 @@
-.modal {
-    padding: 20px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+/* Grundläggande modal-styling */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
 }
 
-.link-button {
+.modal {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    max-width: 90%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.icon-button {
+    font-size: 20px;
+    color: #333;
+    gap: 8px;
+    position: absolute;
+    top: 6px; /* Placera i det övre högra hörnet */
+    left: 190px;
+}
+
+.icon-button:hover {
     background: none;
-    border: none;
-    color: #007BFF;
+    color: #274f42;
+}
+
+/* Felmeddelande och framgångsmeddelande */
+.error-message {
+    color: #491818;
+    font-weight: bold;
+}
+
+.success-message {
+    color: #618678;
+    font-weight: bold;
+}
+
+/* Huvudknappar */
+button {
+    background-color: transparent;
+    border: 2px solid #261a1a;
+    color: #261a1a;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
     cursor: pointer;
-    text-decoration: underline;
+    transition: background-color 0.3s, color 0.3s;
     margin: 10px 0;
 }
 
-.link-button:hover {
-    color: #0056b3;
+button:hover {
+    background-color: #447c67;
+    color: white;
 }
 
-.delete {
-    color: red;
+.delete-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    background-color: #274f42;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
 }
 
-.delete:hover {
-    color: darkred;
+.delete-button:hover {
+    background-color: #261a1a;
 }
+
+/* Understruken knapp för lösenorduppdatering */
+button[type="submit"] {
+    background-color: transparent;
+    border: 2px solid #274f42;
+    color: #0a0a0a;
+}
+
+button[type="submit"]:hover {
+    background-color: #426e5f;
+    color: white;
+}
+
+/* Styling för inmatningsfält */
+input[type="password"] {
+    width: 95%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+input[type="password"]:focus {
+    border-color: #274f42;
+    outline: none;
+}
+
+/* Specific styling för knappar under lösenordsändring */
+button {
+    width: 100%;
+}
+
+/* Modals huvudtext */
+h2, h3 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+/* Specifik styling för när man ändrar lösenord */
+input[type="password"]::placeholder {
+    color: #aaa;
+}
+
+
