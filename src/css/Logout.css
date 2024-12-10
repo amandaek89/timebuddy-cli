@@ -1,0 +1,27 @@
+/* CSS för Logout-knappen */
+.logout-button {
+    display: flex; /* Använd flexbox för att centrera ikonen och texten */
+    align-items: center;
+    background-color: transparent;
+    color: #F5F5DC; /* Beige färg */
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    padding: 8px 12px; /* Lite padding runt knappen */
+    cursor: pointer;
+    text-decoration: none;
+    gap: 8px; /* Avstånd mellan ikonen och texten */
+}
+
+.logout-button:hover {
+    color: #261a1a; /* Färgändring vid hover */
+    background: none;
+}
+
+.logout-button svg {
+    transition: transform 0.2s ease-in-out; /* Liten animation vid hover */
+}
+
+.logout-button:hover svg {
+    transform: scale(1.1); /* Gör ikonen lite större vid hover */
+}

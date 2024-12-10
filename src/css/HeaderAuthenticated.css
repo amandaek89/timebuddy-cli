@@ -12,19 +12,19 @@
     width: 100%;
 }
 
-/* Container för länkar */
+/* Container för länkar och profilknappen */
 .nav-links {
     display: flex;
-    justify-content: center; /* Centra länkarna horisontellt */
+    justify-content: space-between; /* Länkar och profilknapp på samma linje */
     align-items: center;
-    gap: 20px; /* Mellanrum mellan länkar */
+    gap: 30px; /* Avstånd mellan ikonerna */
 }
 
 /* Stil för individuella länkar */
 .nav-link {
     text-decoration: none; /* Ta bort understrykning */
     color: #F5F5DC; /* Beige färg */
-    font-size: 18px;
+    font-size: 24px; /* Samma storlek på ikonerna */
     font-weight: bold;
     text-align: center;
     padding: 5px 10px;
@@ -32,7 +32,26 @@
 }
 
 .nav-link:hover {
-    color: #ffffff; /* Vit färg vid hover */
+    color: #261a1a; /* Färgändring vid hover */
+}
+
+.nav-link:hover svg {
+    transform: scale(1.1); /* Förstora lite vid hover */
+}
+
+/* Profilknappen */
+.profile-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #f5f5dc; /* Färg som matchar länkarna */
+    font-size: 24px; /* Samma storlek som för de andra ikonerna */
+}
+
+/* Hover-effekt för profilknappen */
+.profile-button:hover {
+    color: #261a1a; /* Ändrar färg på hover */
+    transform: scale(1.1); /* Förstorar ikonen vid hover */
 }
 
 /* Container för logout-knappen */

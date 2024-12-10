@@ -28,25 +28,3 @@ html, body {
     max-width: 1200px; /* Optional: Begränsa maxbredden */
 }
 
-/* Profilknappen */
-.profile-button {
-    position: fixed;
-    top: 2px; /* Avstånd från toppen */
-    right: 310px; /* Avstånd från höger */
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #f5f5dc; /* Samma färg som andra element för enhetlighet */
-    z-index: 2000;  /* Se till att knappen är ovanpå andra element */
-    font-size: 12px; /* Ändra storleken på själva knappen */
-}
-
-.profile-button:hover {
-    color: #f5f5dc; /* Färgändring vid hover för interaktivitet */
-    background: none
-}
-
-.profile-button:hover svg {
-    transform: scale(1.1); /* Förstora lite vid hover */
-}
-

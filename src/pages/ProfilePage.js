@@ -34,25 +34,11 @@ const ProfilePage = () => {
             {/* Navbar */}
             <HeaderAuthenticated />
 
-            {/* Profilknappen */}
-            <button
-                className="profile-button"
-                onClick={openPasswordModal}
-                aria-label="Byt lösenord"
-            >
-                <FontAwesomeIcon icon={faUser} size="2x" />
-            </button>
-
             {/* Huvudinnehåll */}
             <div className={"main-content"}>
                 <CalendarContainer />
             </div>
 
-            {/* Modal för lösenordsändring */}
-            <ProfileModal
-                isOpen={isPasswordModalVisible}
-                onClose={closePasswordModal}
-            />
         </div>
     );
 };
