@@ -77,10 +77,12 @@
     background: none;
 }
 
-.close-button-update, .close-button-add {
+.close-button-update, .close-button-add, .close-button-form{
     display: flex; /* Flexbox aktiverat */
     color: #261a1a; /* Färg på stäng-knappen */
     background: none;
+    outline: none;
+    border: none;
     justify-content: flex-end; /* Placera ikonerna längst till höger */
 }
 

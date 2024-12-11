@@ -1,58 +1,90 @@
-import React, { useState } from 'react';
-import { login } from '../services/AuthenticationService';
+import React, { useState } from "react";
+import { FaTimes } from "react-icons/fa";
+import { login } from "../services/AuthenticationService";
+import "../css/ModalForm.css"; // Antag att dessa CSS-filer är rätt konfigurerade
+import "../css/TodoModal.css";
 
-const LoginForm = ({ navigate }) => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+const LoginModal = ({ navigate, onClose }) => {
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsSubmitting(true);
         try {
             const token = await login(username, password);
             if (token) {
-                navigate('/startpage'); // Navigera när inloggningen lyckas
+                navigate("/startpage"); // Navigera när inloggningen lyckas
+                onClose(); // Stänger modalen efter lyckad inloggning
             } else {
-                alert('Sign in failed. Check username or password.');
+                alert("Sign in failed. Check username or password.");
             }
         } catch (error) {
-            console.error('Login error:', error);
-            alert('Login failed due to a server issue.');
+            console.error("Login error:", error);
+            alert("Login failed due to a server issue.");
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
     return (
-        <div className="container">
-            <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                    <label htmlFor="username">Username</label>
-                    <input
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        type="text"
-                        className="form-control"
-                        id="username"
-                        placeholder="Enter username"
-                        autoComplete="username"
-                    />
+        <div className="modal-overlay">
+            <div className="modal-content">
+                {/* Modal header */}
+                <div className="modal-header">
+                    <h2 className="modal-title">Login</h2>
+                    <button
+                        className="icon-button close-button-update"
+                        onClick={onClose}
+                        aria-label="Close"
+                    >
+                        <FaTimes />
+                    </button>
                 </div>
-                <div className="form-group">
-                    <label htmlFor="password">Password</label>
-                    <input
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        type="password"
-                        className="form-control"
-                        id="password"
-                        placeholder="Enter password"
-                        autoComplete="current-password"
-                    />
-                </div>
-                <button type="submit" className="btn btn-info">
-                    Sign in
-                </button>
-            </form>
+
+                <form onSubmit={handleSubmit} className="modal-form">
+                    <label>
+                        <span className="form-label">Username</span>
+                        <input
+                            type="text"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            required
+                            autoComplete="username"
+                        />
+                    </label>
+                    <label>
+                        <span className="form-label">Password</span>
+                        <input
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                            autoComplete="current-password"
+                        />
+                    </label>
+                    <div className="modal-buttons">
+                        <button
+                            type="submit"
+                            className="action-button save-button"
+                            disabled={isSubmitting}
+                        >
+                            {isSubmitting ? "Logging in..." : "Sign in"}
+                        </button>
+                        <button
+                            type="button"
+                            className="action-button cancel-button"
+                            onClick={onClose}
+                            disabled={isSubmitting}
+                        >
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     );
 };
 
-export default LoginForm;
+export default LoginModal;
