@@ -93,7 +93,7 @@ const ProfileModal = ({ isOpen, onClose }) => {
         <div className="modal-overlay">
             <div className="modal">
                 <button
-                    className="icon-button close-button"
+                    className="icon-button-profile close-button"
                     onClick={onClose}
                     aria-label="Stäng"
                 >

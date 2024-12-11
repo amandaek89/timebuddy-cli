@@ -1,33 +1,38 @@
 import React from "react";
 import { FaEdit, FaTrash, FaTimes } from "react-icons/fa"; // Ikoner
-import "../css/TodoModal.css";
+import "../css/TodoModal.css"; // Se till att din CSS-fil är korrekt länkad
 
 const TodoModal = ({ todo, onClose, onEdit, onDelete }) => {
-    if (!todo) return null; // Rendera inget om det inte finns någon todo
+    // Returnera ingenting om ingen todo finns
+    if (!todo) return null;
 
+    // Hanterar borttagning av todo
     const handleDeleteClick = () => {
         if (window.confirm("Är du säker på att du vill ta bort den här uppgiften?")) {
-            onDelete(todo.id); // Anropa onDelete med todo ID
-            onClose(); // Stäng modal efter borttagning
+            onDelete(todo.id); // Ta bort uppgiften med dess ID
+            onClose(); // Stäng modalen efter borttagning
         }
     };
 
     return (
         <div className="modal-overlay">
             <div className="modal-content">
+                {/* Header med titel och ikoner */}
                 <div className="modal-header">
                     <h2 className="modal-title">Detaljer</h2>
                     <div className="icon-buttons">
+                        {/* Redigera-knapp */}
                         <button
                             className="icon-button"
                             onClick={() => {
-                                onEdit(todo);
-                                onClose();
+                                onEdit(todo); // Skicka todo för redigering
+                                onClose(); // Stäng modal
                             }}
                             aria-label="Redigera"
                         >
                             <FaEdit />
                         </button>
+                        {/* Ta bort-knapp */}
                         <button
                             className="icon-button"
                             onClick={handleDeleteClick}
@@ -35,15 +40,17 @@ const TodoModal = ({ todo, onClose, onEdit, onDelete }) => {
                         >
                             <FaTrash />
                         </button>
+                        {/* Stäng-knapp */}
                         <button
                             className="icon-button close-button"
-                            onClick={onClose}
+                            onClick={onClose} // Stäng modal
                             aria-label="Stäng"
                         >
                             <FaTimes />
                         </button>
                     </div>
                 </div>
+                {/* Detaljer om todo */}
                 <div className="todo-details">
                     <p>
                         <strong>Titel:</strong> {todo.title}
@@ -72,3 +79,4 @@ const TodoModal = ({ todo, onClose, onEdit, onDelete }) => {
 };
 
 export default TodoModal;
+
