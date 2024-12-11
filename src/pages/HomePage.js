@@ -6,18 +6,25 @@ import '../css/Media-queries.css';
 import '../css/HomePage.css';
 
 const HomePage = () => {
-    const [isLogin, setIsLogin] = useState(true);
-    const [isVisible, setIsVisible] = useState(false);
+    const [isLogin, setIsLogin] = useState(true); // Bestämmer om vi ska visa login eller register
+    const [isVisible, setIsVisible] = useState(false); // Hanterar om modalen ska vara synlig
     const navigate = useNavigate();
 
+    // Funktion för att visa loginformuläret
     const handleLoginClick = () => {
         setIsVisible(true);
         setIsLogin(true);
     };
 
+    // Funktion för att visa registreringsformuläret
     const handleRegisterClick = () => {
         setIsVisible(true);
         setIsLogin(false);
+    };
+
+    // Funktion för att stänga modalen
+    const handleCloseModal = () => {
+        setIsVisible(false);
     };
 
     return (
@@ -37,23 +44,25 @@ const HomePage = () => {
                 <h1 className="title">Structivo</h1>
                 <h2 className="subtitle">För ett strukturerat liv</h2>
 
-                {/* Form Card */}
+                {/* Form Card - Visa form enligt isVisible */}
                 {isVisible && (
-                    <div className="card">
-                        <h2>{isLogin ? 'Logga in' : 'Registrera'}</h2>
-                        {isLogin ? (
-                            <LoginForm navigate={navigate} />
-                        ) : (
-                            <RegisterForm />
-                        )}
-                        <button
-                            className="toggleButton"
-                            onClick={() => setIsLogin(!isLogin)}
-                        >
-                            {isLogin
-                                ? 'Har du inget konto? Registrera dig'
-                                : 'Har du redan ett konto? Logga in'}
-                        </button>
+                    <div className="modal-overlay">
+                        <div className="modal-content">
+                            <h2>{isLogin ? 'Logga in' : 'Registrera'}</h2>
+                            {isLogin ? (
+                                <LoginForm navigate={navigate} onClose={handleCloseModal} />
+                            ) : (
+                                <RegisterForm onClose={handleCloseModal} />
+                            )}
+                            <button
+                                className="toggleButton"
+                                onClick={() => setIsLogin(!isLogin)}
+                            >
+                                {isLogin
+                                    ? 'Har du inget konto? Registrera dig'
+                                    : 'Har du redan ett konto? Logga in'}
+                            </button>
+                        </div>
                     </div>
                 )}
             </main>
