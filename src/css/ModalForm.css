@@ -1,0 +1,100 @@
+/* Standardstilar för alla formfält */
+input, textarea, select {
+    font-family: Arial, sans-serif; /* Standard teckensnitt */
+    font-size: 1rem; /* Enhetlig textstorlek */
+    color: #333; /* Textfärg */
+    line-height: 1.5; /* Bra läsbarhet */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%; /* Standardbredd */
+    box-sizing: border-box; /* Inkludera padding och border i bredd */
+}
+
+/* Förhindra att inputs har olika utseende på fokus */
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: #426e5f; /* Anpassad kantfärg vid fokus */
+    box-shadow: 0 0 4px rgba(66, 110, 95, 0.5); /* Diskret skugga vid fokus */
+}
+
+/* Gör alla textarea oföränderliga i storlek som standard */
+textarea {
+    resize: none; /* Förhindra storleksändring */
+}
+
+/* Anpassad stil för disabled inputs */
+input:disabled, textarea:disabled, select:disabled {
+    background-color: #f9f9f9;
+    color: #999;
+    cursor: not-allowed;
+}
+
+/* Form */
+.modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.modal-form label {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Left align */
+    gap: 4px;
+    font-size: 1rem;
+}
+
+.modal-form input,
+.modal-form textarea {
+    padding: 8px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.modal-form textarea {
+    resize: none;
+    min-height: 80px;
+}
+
+/* Buttons */
+.modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.action-button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.cancel-button {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.cancel-button:hover {
+    background-color: #261a1a;
+}
+
+.save-button {
+    background-color: #426e5f;
+    color: white;
+}
+
+.save-button:hover {
+    background-color: #274f42;
+}
+
+.save-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}

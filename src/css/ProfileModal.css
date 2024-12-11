@@ -22,16 +22,17 @@
     position: relative;
 }
 
-.icon-button {
+.icon-button-profile {
     font-size: 20px;
     color: #333;
     gap: 8px;
     position: absolute;
     top: 6px; /* Placera i det övre högra hörnet */
     left: 190px;
+    background: none;
 }
 
-.icon-button:hover {
+.icon-button-profile:hover {
     background: none;
     color: #274f42;
 }

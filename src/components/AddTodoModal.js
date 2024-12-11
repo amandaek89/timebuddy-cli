@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { FaTimes } from "react-icons/fa"; // Stängningsikon
 import {addTodo} from "../services/TodoService";
-import "../css/Modal.css";
+import "../css/ModalForm.css";
+import "../css/TodoModal.css";
 
 const AddTodoModal = ({ selectedDate, onClose, onTodoAdded }) => {
     const [title, setTitle] = useState("");
@@ -42,7 +43,7 @@ const AddTodoModal = ({ selectedDate, onClose, onTodoAdded }) => {
                 <div className="modal-header">
                     <h2 className="modal-title">Lägg till ny händelse</h2>
                     <button
-                        className="icon-button close-button"
+                        className="icon-button close-button-add"
                         onClick={onClose}
                         aria-label="Stäng"
                     >

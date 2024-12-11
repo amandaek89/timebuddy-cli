@@ -2,11 +2,11 @@
 html, body {
     height: 100%;
     margin: 0;
-    font-family: Arial, sans-serif; /* Standardfont */
 }
 
 /* Behållare för hela sidan */
 .start-page {
+    background-color: #426e5f;
     display: flex;
     flex-direction: column; /* Header högst upp och panelerna under */
     min-height: 100vh; /* Full höjd för att fylla hela skärmen */
@@ -15,57 +15,51 @@ html, body {
 /* Content: vänster och höger panel */
 .content {
     display: flex; /* Låt vänster och höger panel vara på samma rad */
-    flex: 1; /* Gör att panelerna tar upp all tillgänglig plats under headern */
 }
 
 /* Vänster panel */
 .left-panel {
-    width: 40%; /* Vänster panel tar upp 30% av skärmen */
+    width: 40%; /* Vänster panel tar upp 40% av skärmen */
+    height: 100%;
     padding: 20px;
     background-color: #426e5f;
     color: #261a1a;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    box-sizing: border-box;
-}
-
-/* Klocka, dag, datum och vecka */
-.time-date-week {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: center;
+    justify-content: center; /* Centrera vertikalt */
+    align-items: center; /* Centrera horisontellt */
 }
 
 .clock {
-    font-size: 55px; /* Stora siffror för klockan */
+    font-size: 60px; /* Stora siffror för klockan */
     font-weight: bold;
     color: #261a1a;
-    margin-bottom: 20px;
+    margin-bottom: 3px;
+    margin-top: 5px;
 }
 
 .date-info {
-    font-size: 23px;
+    font-size: 28px;
+    font-weight: bold;
     color: #261a1a;
     margin-bottom: 10px;
 }
 
 .week-number {
     font-size: 25px;
+    font-weight: bold;
     color: #261a1a;
 }
 
 /* Höger panel */
 .right-panel {
     width: 60%; /* Höger panel tar upp 70% av skärmen */
-    padding: 40px;
+    padding: 20px;
     background-color: #426e5f;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
-    box-sizing: border-box;
 }
 
 /* Day View */
@@ -75,7 +69,7 @@ html, body {
     margin: 20px;
     width: 100%;
     max-width: 800px; /* Maximal bredd för DayView */
-    padding-top: 50px;
+    padding-top: 2px;
 }
 
 /* Responsiv design - För skärmar under 1024px */
