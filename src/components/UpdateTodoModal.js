@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaTimes } from "react-icons/fa"; // Stängningsikon
 import "../css/TodoModal.css";
 import "../css/ModalForm.css";
+
 const UpdateTodoModal = ({ todo, onClose, onUpdate }) => {
     const [title, setTitle] = useState(todo.title || "");
     const [description, setDescription] = useState(todo.description || "");

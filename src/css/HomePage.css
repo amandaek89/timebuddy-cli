@@ -12,8 +12,8 @@
     color: #f5f5dc;
     padding: 10px 20px;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: row;
+    gap: 30px;
 }
 
 /* Navigation button styling */
@@ -21,13 +21,16 @@
     background-color: transparent;
     color: #f5f5dc;
     border: none;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
     cursor: pointer;
-    padding: 10px 20px;
     margin: 0 10px;
-    text-decoration: none;
     transition: color 0.3s;
+}
+
+.navButton:hover {
+    color: #261a1a;
+    background: none;
 }
 
 /* Main content styling */
@@ -56,16 +59,16 @@
 /* Title styling */
 .title {
     margin-bottom: 20px;
-    font-size: 32px;
+    font-size: 60px;
     font-weight: bold;
 }
 
 /* Subtitle styling */
 .subtitle {
     margin-bottom: 40px;
-    font-size: 20px;
+    font-size: 25px;
     font-weight: normal;
-    color: #897f93;
+    color: #5d4747;
 }
 
 /* Toggle button styling */

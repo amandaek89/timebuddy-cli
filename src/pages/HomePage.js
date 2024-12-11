@@ -34,7 +34,7 @@ const HomePage = () => {
 
             {/* Main Content */}
             <main className="mainContent">
-                <h1 className="title">TimeBuddy</h1>
+                <h1 className="title">Structivo</h1>
                 <h2 className="subtitle">För ett strukturerat liv</h2>
 
                 {/* Form Card */}
