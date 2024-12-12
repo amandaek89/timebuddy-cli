@@ -43,13 +43,6 @@ const DayView = () => {
         }
     };
 
-
-    const handleEditClick = (todo) => {
-        setSelectedTodo(null); // Stäng detaljmodal
-        setTodoToEdit(todo); // Öppna redigering för vald todo
-        setIsEditModalOpen(true); // Öppna redigeringsmodal
-    };
-
     const handleUpdateTodo = async (id, updatedTodo) => {
         try {
             const updatedData = await updateTodo(id, updatedTodo);

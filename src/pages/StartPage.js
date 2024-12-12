@@ -6,7 +6,7 @@ import HeaderAuthenticated from "../components/HeaderAuthenticated"; // Importer
 const StartPage = () => {
     const [currentTime, setCurrentTime] = useState(new Date()); // För att hålla koll på den aktuella tiden
     const [weekNumber, setWeekNumber] = useState(0); // För att hålla koll på aktuell vecka
-    const [selectedDate, setSelectedDate] = useState('2024-11-22'); // Exempel på datum (kan hämtas från FullCalendar eller annan komponent)
+    const [selectedDate] = useState('2024-11-22'); // Exempel på datum (kan hämtas från FullCalendar eller annan komponent)
 
     // Uppdatera klockan varje sekund
     useEffect(() => {
