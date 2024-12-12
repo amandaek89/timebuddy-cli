@@ -25,10 +25,10 @@ function HeaderAuthenticated() {
                 <div className="navbar-container">
                     {/* Länkar i mitten med ikoner */}
                     <div className="nav-links">
-                        <Link to="/startpage" className="nav-link">
+                        <Link to="/hem" className="nav-link">
                             <FontAwesomeIcon icon={faHome} size="lg" />
                         </Link>
-                        <Link to="/profilepage" className="nav-link">
+                        <Link to="/kalender" className="nav-link">
                             <FontAwesomeIcon icon={faCalendarAlt} size="lg" />
                         </Link>
 

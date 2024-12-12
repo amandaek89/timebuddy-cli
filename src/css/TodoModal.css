@@ -29,10 +29,12 @@
 
 /* Titeltext i modalen */
 .modal-title {
+    display: flex;;
     font-size: 1.5rem;
     color: #333;
     margin: 0;
     text-align: left; /* Vänsterjusterad titel */
+    white-space: nowrap; /* Hindrar radbrytning */
 }
 
 .modal-header {
