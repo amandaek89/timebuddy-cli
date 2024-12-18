@@ -15,14 +15,14 @@ const RegisterForm = ({ onClose }) => {
         try {
             const success = await register(username, password);
             if (success) {
-                alert("User registered. Please log in.");
+                alert("Du är nu registrerad. Logga in för att fortsätta.");
                 onClose(); // Stänger modalen när registreringen lyckas
             } else {
-                alert("Registration failed.");
+                alert("Registrering misslyckades.");
             }
         } catch (error) {
             console.error("Registration error:", error);
-            alert("Registration failed due to a server issue.");
+            alert("Registrering misslyckades på grund av ett serverfel.");
         } finally {
             setIsSubmitting(false);
         }
@@ -45,7 +45,7 @@ const RegisterForm = ({ onClose }) => {
 
                 <form onSubmit={handleSubmit} className="modal-form">
                     <label>
-                        <span className="form-label">Username</span>
+                        <span className="form-label">Användarnamn</span>
                         <input
                             type="text"
                             value={username}
@@ -55,7 +55,7 @@ const RegisterForm = ({ onClose }) => {
                         />
                     </label>
                     <label>
-                        <span className="form-label">Password</span>
+                        <span className="form-label">Lösenord</span>
                         <input
                             type="password"
                             value={password}
@@ -70,7 +70,7 @@ const RegisterForm = ({ onClose }) => {
                             className="action-button save-button"
                             disabled={isSubmitting}
                         >
-                            {isSubmitting ? "Registering..." : "Register"}
+                            {isSubmitting ? "Registrerar..." : "Registrera"}
                         </button>
                         <button
                             type="button"

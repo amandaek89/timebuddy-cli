@@ -33,7 +33,7 @@ const LoginModal = ({ navigate, onClose }) => {
             <div className="modal-content">
                 {/* Modal header */}
                 <div className="modal-header">
-                    <h2 className="modal-title">Login</h2>
+                    <h2 className="modal-title">Logga in</h2>
                     <button
                         className="icon-button close-button-update"
                         onClick={onClose}
@@ -45,7 +45,7 @@ const LoginModal = ({ navigate, onClose }) => {
 
                 <form onSubmit={handleSubmit} className="modal-form">
                     <label>
-                        <span className="form-label">Username</span>
+                        <span className="form-label">Användarnamn</span>
                         <input
                             type="text"
                             value={username}
@@ -55,7 +55,7 @@ const LoginModal = ({ navigate, onClose }) => {
                         />
                     </label>
                     <label>
-                        <span className="form-label">Password</span>
+                        <span className="form-label">Lösenord</span>
                         <input
                             type="password"
                             value={password}
@@ -70,7 +70,7 @@ const LoginModal = ({ navigate, onClose }) => {
                             className="action-button save-button"
                             disabled={isSubmitting}
                         >
-                            {isSubmitting ? "Logging in..." : "Sign in"}
+                            {isSubmitting ? "Loggar in..." : "Logga in"}
                         </button>
                         <button
                             type="button"
